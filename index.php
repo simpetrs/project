@@ -1,8 +1,6 @@
 <?php
-
-@include 'config.php';
-
 session_start();
+@include 'config.php';
 
 if(isset($_POST['submit'])){
 
@@ -20,17 +18,18 @@ if(isset($_POST['submit'])){
 
         if($row['user_type'] == 'admin'){
               
-            $_SESSION['admin_name'] = $row['name'];
+            $_SESSION['names'] = $row['name'];
+            $_SESSION['user_Id'] = $row['user_Id'];
             header('location:admin/admin_page.php');
 
         }elseif($row['user_type'] == 'doctor'){
-
-            $_SESSION['doctor_name'] = $row['name'];
+            $_SESSION['user_Id'] = $row['user_Id'];
+            $_SESSION['names'] = $row['name'];
             header('location:doctor/doctor_page.php');
 
         }elseif($row['user_type'] == 'farmer'){
-            
-            $_SESSION['farmer_name'] = $row['name'];
+            $_SESSION['user_Id'] = $row['user_Id'];
+            $_SESSION['names'] = $row['name'];
             header('location:farmer/farmer_page.php');
         } 
 

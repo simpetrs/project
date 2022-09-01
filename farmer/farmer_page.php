@@ -1,11 +1,8 @@
 <?php
-
-@include 'config.php';
-
 session_start();
-
-if(!isset($_SESSION['farmer_name'])){
-    header('location:index.php');
+@include 'config.php';
+if(!isset($_SESSION['user_Id'])){
+    header('location:../');
 }
 
 
@@ -153,12 +150,12 @@ if(!isset($_SESSION['farmer_name'])){
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <img src="assets/img/profile.jpg" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">Sabella</span>
+            <span class="d-none d-md-block dropdown-toggle ps-2"><?=$_SESSION['names']?></span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6>Sabella</h6>
+              <h6><?=$_SESSION['names']?></h6>
               <span>Farmer</span>
             </li>
             <li>
