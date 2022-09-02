@@ -4,8 +4,8 @@
 
 session_start();
 
-if(!isset($_SESSION['doctor_name'])){
-    header('location:index.php');
+if(!isset($_SESSION['user_Id'])){
+    header('location:../index.php');
 }
 
 

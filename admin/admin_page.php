@@ -9,8 +9,7 @@ if(!isset($_SESSION['user_Id'])){
 
 ?>
 
-<?php 
-include 'config.php'; 
+<?php
 //count property
 $select = "SELECT * FROM user WHERE user_Type='doctor'";
 $sql_query = mysqli_query($conn, $select);
