@@ -9,6 +9,13 @@ include_once "../header.php";
   <div class="card">
     <div class="pagetitle">
     <h1>Payments</h1>
+        <?php
+        if(isset($_GET['status'])) {
+            ?>
+            <div class="alert alert-info"><?=$_GET['message']?></div>
+        <?php
+        }
+        ?>
     </div>
 </div><!-- End Page Title -->
 <div class="col-12 bg-white p-4">

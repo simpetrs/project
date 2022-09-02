@@ -108,9 +108,9 @@ include_once "../header.php";
 
 <script>
     function makePayment(id, doctor) {
-        let amount = 1000
+        let amount = 1500
         let html = `
-        <form method="post" action="payment.php">
+        <form method="post" action="payment.php" >
 <p>Hello, by making this payment, you are completing your appointment to <b>` + doctor +` </b>
 </p>
 <b>Charge<b>
@@ -118,8 +118,8 @@ include_once "../header.php";
 <input type='hidden' value="` + amount + `" name="amount" />
 <b>Provide an Airtel or MTN number to be charged</b>
 <input type='hidden' value='` + id +`' name='appointment'/>
-<input type='text' name='phone' class='form-control rounded-0 mt-3 mb-3' placeholder="in format 256705000000"/>
-<button class='btn btn-primary form-control rounded-0'>Submit</button>
+<input type='text' name='phone' required class='form-control rounded-0 mt-3 mb-3' placeholder="in format 256705000000"/>
+<button class='btn btn-primary form-control rounded-0' onclick="disableBtn()" id="btn">Submit</button>
 </form>
         `
         $("#modal").html(html)
@@ -128,6 +128,9 @@ include_once "../header.php";
 </script>
   <script type="text/javascript">
     $('#datatable').DataTable({});
+    function disableBtn() {
+        $("#btn").hide()
+    }
   </script>
 
 </body>
