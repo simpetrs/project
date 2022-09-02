@@ -2,3 +2,4 @@ config.php
 ./farmer/config.php
 ./admin/config.php
 ./doctor/config.php
+./cron.log
