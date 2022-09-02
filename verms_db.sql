@@ -1,52 +1,42 @@
--- phpMyAdmin SQL Dump
--- version 5.1.1
--- https://www.phpmyadmin.net/
+-- MySQL dump 10.13  Distrib 8.0.25, for macos11.3 (x86_64)
 --
--- Host: 127.0.0.1
--- Generation Time: Aug 30, 2022 at 09:03 AM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 8.0.13
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
+-- Host: localhost    Database: verms_db
+-- ------------------------------------------------------
+-- Server version	8.0.25
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `verms_db`
---
-
--- --------------------------------------------------------
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
 -- Table structure for table `admin`
 --
 
+DROP TABLE IF EXISTS `admin`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `admin` (
   `admin_Id` varchar(50) NOT NULL,
-  `admin_Name` text DEFAULT NULL,
+  `admin_Name` text,
   `user_name` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `admin`
---
-
-INSERT INTO `admin` (`admin_Id`, `admin_Name`, `user_name`, `password`) VALUES
-('1', 'Simon', 'admin@gmail.com', 'admin@100');
-
--- --------------------------------------------------------
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `alert`
 --
 
+DROP TABLE IF EXISTS `alert`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `alert` (
   `alert_Id` varchar(50) NOT NULL,
   `alert_timeDate` date NOT NULL,
@@ -54,90 +44,79 @@ CREATE TABLE `alert` (
   `appointment_Id` varchar(50) NOT NULL COMMENT '{fk}',
   `farmer_Id` varchar(50) NOT NULL COMMENT '{fk}',
   `doctor_Id` varchar(50) NOT NULL COMMENT '{fk}'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `animal`
 --
 
+DROP TABLE IF EXISTS `animal`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `animal` (
   `animal_Id` varchar(50) NOT NULL,
-  `animal_Name` text DEFAULT NULL,
+  `animal_Name` text,
   `farmer_Id` varchar(50) NOT NULL COMMENT '{fk}'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `appointment`
 --
 
+DROP TABLE IF EXISTS `appointment`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `appointment` (
-  `appointment_Id` int(11) NOT NULL,
-  `your_name` varchar(255) NOT NULL,
-  `your_location` varchar(255) NOT NULL,
-  `appointment_Type` varchar(50) NOT NULL,
-  `appointment_Date` date NOT NULL,
-  `appointment_Time` time(6) NOT NULL,
-  `appointment_Description` text NOT NULL,
-  `farmer_Id` varchar(50) NOT NULL COMMENT '{fk}',
-  `doctor_Id` varchar(50) NOT NULL COMMENT '{fk}',
-  `payment_Id` varchar(50) NOT NULL COMMENT '{fk}'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `appointment`
---
-
-INSERT INTO `appointment` (`appointment_Id`, `your_name`, `your_location`, `appointment_Type`, `appointment_Date`, `appointment_Time`, `appointment_Description`, `farmer_Id`, `doctor_Id`, `payment_Id`) VALUES
-(1, 'simon', 'masindi', 'Emergency', '2022-09-03', '10:51:00.000000', 'here', '', '', ''),
-(2, 'Henry', 'Kampala', 'Not Emergency', '2022-09-03', '10:03:00.000000', 'hoooooooooooooooooo', '', '', ''),
-(3, 'simon', 'sacdscx', 'Emergency', '2022-08-04', '13:55:00.000000', 'l;;;;;;;;;;;;;;;;;;;;;;;', '', '', '');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `appointment_type`
---
-
-CREATE TABLE `appointment_type` (
-  `appType_Id` varchar(50) NOT NULL,
-  `emergency` varchar(50) NOT NULL,
-  `appointment_Id` varchar(50) NOT NULL COMMENT '{fk}',
-  `notEmergency` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
+  `user` int NOT NULL,
+  `doctor` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `payment` int DEFAULT NULL,
+  `description` text,
+  `location` varchar(255) DEFAULT NULL,
+  `appointment` smallint NOT NULL DEFAULT '1',
+  `_time` time DEFAULT NULL,
+  `_date` date DEFAULT NULL,
+  `date_added` date DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 ;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `category`
 --
 
+DROP TABLE IF EXISTS `category`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `category` (
   `cat_Id` varchar(50) NOT NULL,
   `cat_Name` text NOT NULL,
   `cat_description` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `district`
 --
 
+DROP TABLE IF EXISTS `district`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `district` (
   `district_Id` varchar(50) NOT NULL,
-  `district_Name` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
+  `district_Name` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `doctor`
 --
 
+DROP TABLE IF EXISTS `doctor`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `doctor` (
   `doctor_Id` varchar(50) NOT NULL,
   `user_Id` varchar(50) NOT NULL COMMENT '{fk}',
@@ -145,25 +124,29 @@ CREATE TABLE `doctor` (
   `level_qualification` text NOT NULL,
   `cat_Id` varchar(50) NOT NULL COMMENT '{fk}',
   `doctor_status` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `farmer`
 --
 
+DROP TABLE IF EXISTS `farmer`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `farmer` (
   `farmer_Id` varchar(50) NOT NULL,
   `user_Id` varchar(50) NOT NULL COMMENT '{fk}'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `payment`
 --
 
+DROP TABLE IF EXISTS `payment`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `payment` (
   `payment_Id` varchar(50) NOT NULL,
   `payment_Date` date NOT NULL,
@@ -171,120 +154,88 @@ CREATE TABLE `payment` (
   `amount` varchar(50) NOT NULL,
   `farmer_Id` varchar(50) NOT NULL COMMENT '{fk}',
   `doctor_Id` varchar(20) NOT NULL COMMENT '{fk}'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- --------------------------------------------------------
+--
+-- Table structure for table `payments`
+--
+
+DROP TABLE IF EXISTS `payments`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `payments` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user` int NOT NULL,
+  `amount` int NOT NULL DEFAULT '0',
+  `appointment` int NOT NULL,
+  `date_added` date NOT NULL,
+  `date_paid` date NOT NULL,
+  `receipt` char(64) NOT NULL,
+  `status` smallint NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `receipt` (`receipt`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 ;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `report`
 --
 
+DROP TABLE IF EXISTS `report`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `report` (
-  `report_Id` int(11) NOT NULL,
+  `report_Id` int NOT NULL AUTO_INCREMENT,
   `your_name` varchar(255) NOT NULL,
   `report_Area` varchar(255) NOT NULL,
   `animal` varchar(255) NOT NULL,
   `disease_Description` varchar(255) NOT NULL,
-  `farmer_Id` int(11) NOT NULL COMMENT '{fk}'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `report`
---
-
-INSERT INTO `report` (`report_Id`, `your_name`, `report_Area`, `animal`, `disease_Description`, `farmer_Id`) VALUES
-(1, '0000-00-00', '00:00:00.000000', 'Cow', 'here', 0),
-(2, 'simon', 'Peter', 'Cow', 'jk,m', 0),
-(4, 'Peter', 'Kikoni', 'Sheep', 'Sick', 0),
-(5, 'jjjjjj', 'kkkkkkkkkk', 'Cow', 'kllllll', 0);
-
--- --------------------------------------------------------
+  `farmer_Id` int NOT NULL COMMENT '{fk}',
+  PRIMARY KEY (`report_Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 ;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `service`
 --
 
+DROP TABLE IF EXISTS `service`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `service` (
   `service_Id` varchar(50) NOT NULL,
   `service_Name` text NOT NULL,
   `service_description` text NOT NULL,
   `doctor_Id` varchar(50) NOT NULL COMMENT '{fk}'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `user`
 --
 
+DROP TABLE IF EXISTS `user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user` (
-  `user_Id` int(50) NOT NULL,
+  `user_Id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `phone` varchar(13) NOT NULL,
   `password` varchar(20) NOT NULL,
-  `user_type` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `user_type` varchar(50) NOT NULL,
+  PRIMARY KEY (`user_Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 ;
+/*!40101 SET character_set_client = @saved_cs_client */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
---
--- Dumping data for table `user`
---
-
-INSERT INTO `user` (`user_Id`, `name`, `email`, `phone`, `password`, `user_type`) VALUES
-(1, 'Adima Gilbert', 'doctor@gmail.com', '0750395527', '12345', 'doctor'),
-(2, 'Simon', 'admin@gmail.com', '0782951174', 'admin@100', 'admin'),
-(3, 'Bella', 'farmer@gmail.com', '+256750395527', '123456', 'farmer'),
-(4, 'Simon Amapiri', 'amapirisimon@gmail.com', '0750395527', '12', 'doctor'),
-(5, 'Birungi Mourisha', 'mbirungi@gmail.com', '0777345946', '1234', 'farmer'),
-(6, 'Joseph', 'joseph@gmail.com', '0777766666', '1234', 'farmer'),
-(7, 'Shaban Deno', 'shaban@gmail.com', '0775395127', '1234', 'farmer'),
-(8, 'Adima Gilbert', 'gilbert@gmail.com', '0777533333', '1234', 'farmer');
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `appointment`
---
-ALTER TABLE `appointment`
-  ADD PRIMARY KEY (`appointment_Id`);
-
---
--- Indexes for table `report`
---
-ALTER TABLE `report`
-  ADD PRIMARY KEY (`report_Id`);
-
---
--- Indexes for table `user`
---
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`user_Id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `appointment`
---
-ALTER TABLE `appointment`
-  MODIFY `appointment_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `report`
---
-ALTER TABLE `report`
-  MODIFY `report_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `user`
---
-ALTER TABLE `user`
-  MODIFY `user_Id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-COMMIT;
-
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2022-09-02 11:43:20
