@@ -37,7 +37,6 @@ include_once './config.php';
 
 <?php
 
-include 'config.php';
 $userId1 = $_SESSION["userId1"];
 $retreive = "SELECT * FROM appointment WHERE appointment_Id = '$userId1'";
 $sql_query = mysqli_query($conn, $retreive);
