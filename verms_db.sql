@@ -31,6 +31,16 @@ CREATE TABLE `admin` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `admin`
+--
+
+LOCK TABLES `admin` WRITE;
+/*!40000 ALTER TABLE `admin` DISABLE KEYS */;
+INSERT INTO `admin` VALUES ('1','Simon','admin@gmail.com','admin@100');
+/*!40000 ALTER TABLE `admin` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `alert`
 --
 
@@ -48,6 +58,15 @@ CREATE TABLE `alert` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `alert`
+--
+
+LOCK TABLES `alert` WRITE;
+/*!40000 ALTER TABLE `alert` DISABLE KEYS */;
+/*!40000 ALTER TABLE `alert` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `animal`
 --
 
@@ -60,6 +79,15 @@ CREATE TABLE `animal` (
   `farmer_Id` varchar(50) NOT NULL COMMENT '{fk}'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `animal`
+--
+
+LOCK TABLES `animal` WRITE;
+/*!40000 ALTER TABLE `animal` DISABLE KEYS */;
+/*!40000 ALTER TABLE `animal` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `appointment`
@@ -84,6 +112,16 @@ CREATE TABLE `appointment` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `appointment`
+--
+
+LOCK TABLES `appointment` WRITE;
+/*!40000 ALTER TABLE `appointment` DISABLE KEYS */;
+INSERT INTO `appointment` VALUES (9,1,5,NULL,'New Chicken Pox','Kampala',1,'23:30:00','2022-09-15','2022-09-01'),(9,4,6,NULL,'Small Pox','Kampala',2,'23:31:00','2022-09-02','2022-09-01'),(9,4,7,NULL,'Chicken pox','kampala',1,'10:32:00','2022-09-02','2022-09-02'),(10,4,8,NULL,'Chicken pox','Kampala',2,'10:52:00','2022-09-16','2022-09-02');
+/*!40000 ALTER TABLE `appointment` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `category`
 --
 
@@ -98,6 +136,15 @@ CREATE TABLE `category` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `category`
+--
+
+LOCK TABLES `category` WRITE;
+/*!40000 ALTER TABLE `category` DISABLE KEYS */;
+/*!40000 ALTER TABLE `category` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `district`
 --
 
@@ -109,6 +156,15 @@ CREATE TABLE `district` (
   `district_Name` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `district`
+--
+
+LOCK TABLES `district` WRITE;
+/*!40000 ALTER TABLE `district` DISABLE KEYS */;
+/*!40000 ALTER TABLE `district` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `doctor`
@@ -128,6 +184,15 @@ CREATE TABLE `doctor` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `doctor`
+--
+
+LOCK TABLES `doctor` WRITE;
+/*!40000 ALTER TABLE `doctor` DISABLE KEYS */;
+/*!40000 ALTER TABLE `doctor` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `farmer`
 --
 
@@ -139,6 +204,15 @@ CREATE TABLE `farmer` (
   `user_Id` varchar(50) NOT NULL COMMENT '{fk}'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `farmer`
+--
+
+LOCK TABLES `farmer` WRITE;
+/*!40000 ALTER TABLE `farmer` DISABLE KEYS */;
+/*!40000 ALTER TABLE `farmer` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `payment`
@@ -156,6 +230,15 @@ CREATE TABLE `payment` (
   `doctor_Id` varchar(20) NOT NULL COMMENT '{fk}'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `payment`
+--
+
+LOCK TABLES `payment` WRITE;
+/*!40000 ALTER TABLE `payment` DISABLE KEYS */;
+/*!40000 ALTER TABLE `payment` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `payments`
@@ -179,6 +262,16 @@ CREATE TABLE `payments` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `payments`
+--
+
+LOCK TABLES `payments` WRITE;
+/*!40000 ALTER TABLE `payments` DISABLE KEYS */;
+INSERT INTO `payments` VALUES (1,9,1000,6,'2022-09-01','2022-09-01','ad203a31c5b01573bd8768703300907541df4fcaefbefce05ec3cef18c4a7898',0),(2,9,1000,6,'2022-09-01','2022-09-01','c9261cd2a19ddc757dc4a5a91b76516313e441f3d7a18e3f2ca8999301253d8d',0),(3,9,1000,6,'2022-09-01','2022-09-01','a8ca97f1299818b674855d9014b4a5ca11847646f466a9520b57ac9f22204958',0),(4,9,1500,7,'2022-09-02','2022-09-02','2eea31212acd1fa4c0d25ea0680c03791146c21ea24cd582e72f954d8ac28701',0),(5,10,1500,8,'2022-09-02','2022-09-02','33b6aeb91824b0e33ed25d42049cbc5fc88af79821f2e347332d5d37b3abbe04',0),(6,10,1500,8,'2022-09-02','2022-09-02','39bf3361b9b3fe2abf621caef7d7068b17bb2e21d17c3f644f16c899aa000e97',0),(7,10,1500,8,'2022-09-02','2022-09-02','b35d03563b243fdfd49598862a940cf9d5282345e34a72be02e759707644acc0',0),(8,10,1500,8,'2022-09-02','2022-09-02','f3938a990e0d8a13b555daf9d3e4f54fe6139c429f64bc6fb52f3add1b21465b',0),(9,10,1500,8,'2022-09-02','2022-09-02','5493fc61d9fe812fd86d2ab2f45744a452a85775675bc9dc86479be4752a235a',0);
+/*!40000 ALTER TABLE `payments` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `report`
 --
 
@@ -197,6 +290,16 @@ CREATE TABLE `report` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `report`
+--
+
+LOCK TABLES `report` WRITE;
+/*!40000 ALTER TABLE `report` DISABLE KEYS */;
+INSERT INTO `report` VALUES (1,'0000-00-00','00:00:00.000000','Cow','here',0),(2,'simon','Peter','Cow','jk,m',0),(4,'Peter','Kikoni','Sheep','Sick',0),(5,'jjjjjj','kkkkkkkkkk','Cow','kllllll',0);
+/*!40000 ALTER TABLE `report` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `service`
 --
 
@@ -210,6 +313,15 @@ CREATE TABLE `service` (
   `doctor_Id` varchar(50) NOT NULL COMMENT '{fk}'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `service`
+--
+
+LOCK TABLES `service` WRITE;
+/*!40000 ALTER TABLE `service` DISABLE KEYS */;
+/*!40000 ALTER TABLE `service` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `user`
@@ -228,6 +340,16 @@ CREATE TABLE `user` (
   PRIMARY KEY (`user_Id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user`
+--
+
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (1,'Adima Gilbert','doctor@gmail.com','0750395527','12345','doctor'),(2,'Simon','admin@gmail.com','0782951174','admin@100','admin'),(3,'Bella','farmer@gmail.com','+256750395527','123456','farmer'),(4,'Simon Amapiri','amapirisimon@gmail.com','0750395527','12','doctor'),(5,'Birungi Mourisha','mbirungi@gmail.com','0777345946','1234','farmer'),(6,'Joseph','joseph@gmail.com','0777766666','1234','farmer'),(7,'Shaban Deno','shaban@gmail.com','0775395127','1234','farmer'),(8,'Adima Gilbert','gilbert@gmail.com','0777533333','1234','farmer'),(9,'ashiraff','ashan@boostedtechs.com','+256759800742','rA3OfbyxmD^O','farmer'),(10,'Ashiraff','ashiraff@tumusii.me','+256784565201','1234','farmer');
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -238,4 +360,4 @@ CREATE TABLE `user` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-02 11:43:20
+-- Dump completed on 2022-09-02 11:46:30
