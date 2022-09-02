@@ -9,7 +9,7 @@ if(isset($_POST['submit'])){
 
     $select = " SELECT * FROM user WHERE email='$email' AND password='$password' ";
 
-    $result = mysqli_query($conn, $select);
+    $result = mysqli_query($conn, $select) or die(mysqli_error($conn));
 
     if(mysqli_num_rows($result) > 0)
     {
