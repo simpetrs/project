@@ -46,7 +46,7 @@ function send_payment($amount, $email, $phone_number, $reference, $names){
         CURLOPT_HTTPHEADER => [
             'Accept-Charset: utf-8',
             'Content-Type: application/json',
-            'User-Access-Key:2d75bbf51913de87983b7fd2647012819e2041c9dfe1f44e0b52e4e4b6e64265',
+            'User-Access-Key:e9ac6bc84d2c30cc8b73d7299faf47af0503df6ac56cb024b71034fe1f38a95a',
             'Project-Sid:9b43ba9acaf9228b15a1ac6fe11e4f39812454eae1854610571ec756b35b7d69',
         ],
 

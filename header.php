@@ -43,7 +43,7 @@ $sql_query = mysqli_query($conn, $retreive);
 ?>
 
 
-<body>
+<body class="bg-white">
 
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
