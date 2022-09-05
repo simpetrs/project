@@ -8,6 +8,63 @@ include_once "../header.php";
               <div class="card">
                 <div class="pagetitle">                                
                   <h1>Profile</h1>
+                    <?php
+                    $rows = mysqli_query($conn, "select * from user where user_Id = '" . $_SESSION['user_Id'] . "'");
+                    $rows = mysqli_fetch_array($rows);
+                    $user = $_SESSION['user_Id'];
+                    if (isset($_POST['names'])) {
+                        $names = trim($_POST['names']);
+                        $description = trim($_POST['about']);
+                        $job = trim($_POST['job']);
+                        $country = trim($_POST['country']);
+                        $company  = trim($_POST['company']);
+                        $address = trim($_POST['address']);
+                        $phone = trim($_POST['phone']);
+                        if (empty($names) or empty($phone) or empty($address)) {
+                            ?>
+                            <div class="alert alert-danger">
+                                Name field, phone field and Address should be provided.
+                            </div>
+                    <?php
+                        } else {
+                            mysqli_query($conn, "update user set name = '$names', description = '$description',
+                                              job = '$job', country = '$country', address = '$address', phone = '$phone', company = '$company' where user_Id = '$user' ") or die(mysqli_query($conn));
+                            ?>
+                            <div class="alert alert-success">
+                                Successfully updated Personal Profile.
+                            </div>
+                    <?php
+                        }
+                    }
+                    elseif (isset($_POST['changePwd'])) {
+                        $password_1 = hash("sha256", $_POST['newpassword']);
+                        $password_2 = hash("sha256", $_POST['renewpassword']);
+                        $old_password = hash("sha256", $_POST['password']);
+                        if($rows['password'] != $old_password) {
+                            ?>
+                            <div class="alert alert-danger">
+                                Old password incorrect
+                            </div>
+                    <?php
+                        }else {
+                            if ($password_1 != $password_2) {
+                                ?>
+                                <div class="alert alert-danger">
+                                    Password mismatch.
+                                </div>
+                    <?php
+
+                            } else{
+                                mysqli_query($conn, "update user set password = '$password_2' where user_Id = '$user'") or die(mysqli_error($conn));
+                                ?>
+                                <div class="alert alert-success">
+                                    Password successfully changed. You will
+                                </div>
+                                <?php
+                            }
+                        }
+                    }
+                    ?>
                 </div>
               </div><!-- End Page Title -->
 
@@ -47,10 +104,6 @@ include_once "../header.php";
                 </li>
 
               </ul>
-                <?php
-                $rows = mysqli_query($conn, "select name, email, phone from user where user_Id = '" . $_SESSION['user_Id'] . "'");
-                $rows = mysqli_fetch_array($rows);
-                ?>
 
               <div class="tab-content pt-2">
 
@@ -75,32 +128,35 @@ include_once "../header.php";
                     <div class="col-lg-9 col-md-8"><?php echo $rows["phone"]; ?></div>
                   </div>
 
-                  <!-- <div class="row">
+                  <div class="row">
                     <div class="col-lg-3 col-md-4 label">Country</div>
-                    <div class="col-lg-9 col-md-8">Uganda</div>
+                    <div class="col-lg-9 col-md-8"><?php echo $rows["country"]; ?></div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Address</div>
-                    <div class="col-lg-9 col-md-8">Masindi</div>
+                    <div class="col-lg-9 col-md-8"><?php echo $rows["address"]; ?></div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Phone</div>
-                    <div class="col-lg-9 col-md-8">+256782951174</div>
+                    <div class="col-lg-9 col-md-8"><?php echo $rows["phone"]; ?></div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Email</div>
-                    <div class="col-lg-9 col-md-8">b@gmail.com</div>
-                  </div> -->
-
+                    <div class="col-lg-9 col-md-8"><?php echo $rows["email"]; ?></div>
+                  </div>
+                    <div class="row">
+                        <div class="col-lg-3 col-md-4 label">Description</div>
+                        <div class="col-lg-9 col-md-8"><?php echo $rows["description"]; ?></div>
+                    </div>
                 </div>
 
                 <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
                   <!-- Profile Edit Form -->
-                  <form>
+                  <form action="" method="post">
                     <div class="row mb-3">
                       <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
                       <div class="col-md-8 col-lg-9">
@@ -115,71 +171,68 @@ include_once "../header.php";
                     <div class="row mb-3">
                       <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Full Name</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="fullName" type="text" class="form-control" id="fullName" value="Simon Peter">
+                        <input name="names" type="text" class="form-control" id="fullName" value="<?=$rows['name']?>">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="about" class="col-md-4 col-lg-3 col-form-label">About</label>
                       <div class="col-md-8 col-lg-9">
-                        <textarea name="about" class="form-control" id="about" style="height: 100px">well trained</textarea>
+                        <textarea name="about" class="form-control" id="about" style="height: 100px" placeholder="Short Biography"><?=$rows['description']?></textarea>
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="company" class="col-md-4 col-lg-3 col-form-label">Company</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="company" type="text" class="form-control" id="company" value="VERMS">
+                        <input name="company" type="text" class="form-control" id="company" placeholder="Where do you work from?" value="<?=$rows['company']?>">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="Job" class="col-md-4 col-lg-3 col-form-label">Job</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="job" type="text" class="form-control" id="Job" value="Vet Doctor">
+                        <input name="job" type="text" class="form-control" id="Job" placeholder="Your Job description" value="<?=$rows['job']?>">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="Country" class="col-md-4 col-lg-3 col-form-label">Country</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="country" type="text" class="form-control" id="Country" value="Uganda">
+                        <input name="country" type="text" class="form-control" id="Country" placeholder="Eg: Uganda" value="<?=$rows['country']?>">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="Address" class="col-md-4 col-lg-3 col-form-label">Address</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="address" type="text" class="form-control" id="Address" value="Kampala">
+                        <input name="address" type="text" class="form-control" id="Address" placeholder="Where do you stay?" value="<?=$rows['address']?>">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Phone</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="phone" type="text" class="form-control" id="Phone" value="+256782951174">
+                        <input name="phone" type="text" class="form-control" id="Phone" value="<?=$rows['phone']?>">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="email" type="email" class="form-control" id="Email" value="b@gmail.com">
+                        <input  type="email" disabled class="form-control" id="Email" value="<?=$rows['email']?>">
                       </div>
                     </div>
                     
                     <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Save Changes</button>
+                      <button type="submit" value="submit" class="btn btn-primary">Save Changes</button>
                     </div>
                   </form><!-- End Profile Edit Form -->
-
-                </div>
-                  
                 </div>
 
                 <div class="tab-pane fade pt-3" id="profile-change-password">
                   <!-- Change Password Form -->
-                  <form>
+                  <form action="" method="post">
 
                     <div class="row mb-3">
                       <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
@@ -203,7 +256,7 @@ include_once "../header.php";
                     </div>
 
                     <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Change Password</button>
+                      <input type="submit" class="btn btn-primary" name="changePwd" value="Change Password">
                     </div>
                   </form><!-- End Change Password Form -->
 

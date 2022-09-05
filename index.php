@@ -5,7 +5,7 @@ session_start();
 if(isset($_POST['submit'])){
 
     $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $password = $_POST['password'];
+    $password = hash("sha256", $_POST['password']);
 
     $select = " SELECT * FROM user WHERE email='$email' AND password='$password' ";
 
@@ -59,7 +59,13 @@ if(isset($_POST['submit'])){
             <hr>
 
             <?php
-            
+            if (isset($_GET['s'])) {
+                ?>
+                <div class="alert alert-success text-success">
+                    Success fully created account. Kindly login
+                </div>
+            <?php
+            }
             if(isset($error)){
                foreach($error as $error){
                    echo '<span class="error-msg">'.$error.'</span>';

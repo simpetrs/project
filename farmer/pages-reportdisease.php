@@ -6,22 +6,32 @@ include_once "../header.php";
 
   <?php
 if(isset($_POST['submit'])){
+    //print_r($_POST);
+    $user = $_SESSION['user_Id'];
+    $description = trim($_POST['description']);
+    $location = trim($_POST['location']);
+    $date = date("Y-m-d");
+    $animal = $_POST['animal'];
+    if (empty($description) or empty($location)) {
+    ?>
+        <div class="alert alert-warning">Disease description and Location should be provided.</div>
+    <?php
+    }
+    else{
 
-  $name = $_POST['your_name'];
-  $location = $_POST['report_Area']; 
-   $animal = $_POST['animal'];
-  $desc= $_POST['disease_Description'];
-  print_r($_POST);
-die();
+        $insert = "INSERT INTO animal_disease_cases (disease_case, animal, location, date_added, user) 
+        VALUES ('$description', '$animal', '$location', '$date', '$user')";
+        $sql_query = mysqli_query($conn, $insert);
+        if ($sql_query == true){
+            ?>
+            <div class="alert alert-success">Your submission has been successful.We shall contact you when findings are made.</div>
 
-$insert = "INSERT INTO report ( your_name, report_Area, animal, disease_Description) VALUES ('$name', '$location', '$animal', '$desc')";
-$sql_query = mysqli_query($conn, $insert);
-if ($sql_query == true){
-  echo 'sucessful ';
-}else{
-  echo mysqli_error($conn);
+            <?php
+        }else{
+            echo mysqli_error($conn);
+        }
+    }
 }
-} 
 ?>         
 <!-- I Have to work on this page title tonight -->
 <div class="col-12">
@@ -36,53 +46,39 @@ if ($sql_query == true){
       <div class="col">
         <div class="card card-registration my-4">
           <div class="row g-0">
-            <div class="col-xl-6 d-none d-xl-block">
-              <img src="assets/img/animal.png "
-                alt="Sample photo" class="img-fluid"
-                style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;" width="100%"/>
-            </div>
-            <div class="col-xl-6">
+<!--            <div class="col-xl-12 d-none d-xl-block">-->
+<!--              <img src="assets/img/animal.png "-->
+<!--                alt="Sample photo" class="img-fluid"-->
+<!--                style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;" width="100%"/>-->
+<!--            </div>-->
+            <div class="col-xl-12">
               <div class="card-body p-md-5 text-black">
                 <h3 class="mb-5 text-uppercase">REPORT DISEASES</h3>
                 <form action="" method="post" >
-                 <div class="form-outline mb-4">
-                  <input type="text" id="form3Example1m" name="your_name" class="form-control form-control-lg" placeholder="Name"/>
-                </div>
-               
-                <div class="form-outline mb-4">
-                  <input type="text" id="form3Example8" name="report_Area" class="form-control form-control-lg" placeholder="Location"/>
-                </div>
-
-                <div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
-
-                  <h6 class="mb-0 me-4">Animal: </h6>
-
-                  <div class="form-check form-check-inline mb-0 me-4">
-                    <input  class="form-check-input" type="checkbox" name="animal[]" id="Animal"
-                      value="Cow" />
-                    <label class="form-check-label" for="femaleGender">Cow</label>
-                  </div>
-
-                  <div class="form-check form-check-inline mb-0 me-4">
-                    <input  class="form-check-input" type="checkbox" name="animal[]" id="Animal"
-                      value="Goat" />
-                    <label class="form-check-label" for="maleGender">Goat</label>
-                  </div>
-
-                  <div class="form-check form-check-inline mb-0 me-4">
-                    <input  class="form-check-input" type="checkbox" name="animal[]" id="Animal"
-                      value="Sheep" />
-                    <label class="form-check-label" for="maleGender">Sheep</label>
-                  </div>
-                    <div class="">
-
+                  <h6 class="mb-0 me-4 mb-4">Animal: </h6>
+                    <select class="form-control" name="animal">
+                        <?php
+                        $animals = mysqli_query($conn, "select id, animal from animals order by animal asc") or die(mysqli_error($conn));
+                        while ($row = mysqli_fetch_array($animals)) {
+                            ?>
+                                <option value="<?=$row['id']?>" ><?=$row['animal']?></option>
+                            <?php
+                        }
+                        ?>
+                    </select>
+                <div class="form-outline mb-4 mt-4">
+                    <h6>Disease Description</h6>
+                    <div class="alert alert-info">
+                        The description should include symptoms, duration it has taken and possible first aid rendered with results to such aid on the specific animals reported.
                     </div>
+                <textarea name="description" class="form-control" placeholder="Disease Description"></textarea>
                 </div>
-                <div class="form-outline mb-4">
-                <textarea name="disease_Description" class="form-control" placeholder="Disease Description"></textarea>
-                </div>
+                    <div class="form-outline mb-4 mt-4">
+                        <h6>Where are you reporting from?</h6>
+                        <input type="text" id="form3Example8" name="location" class="form-control form-control-lg" placeholder="Location"/>
+                    </div>
 
-                <div class="d-flex justify-content-end pt-3">
+                    <div class="d-flex justify-content-end pt-3">
                   <button type="reset" name="reset" class="btn btn-danger btn-lg">Reset all</button>
                   <button type="submit" name="submit" class="btn btn-primary btn-lg ms-2">Submit form</button>
                 </div>

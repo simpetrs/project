@@ -4,11 +4,10 @@ if (! isset($_SESSION['user_Id'])) {
     header("location:../index.php");
     exit;
 }
-include_once './config.php';
+include_once '../config.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -37,17 +36,9 @@ include_once './config.php';
 
     <!-- Template Main CSS File -->
     <link href="assets/css/main.css" rel="stylesheet">
+
 </head>
-
-<?php
-
-$userId1 = $_SESSION["userId1"];
-$retreive = "SELECT * FROM appointment WHERE appointment_Id = '$userId1'";
-$sql_query = mysqli_query($conn, $retreive);
-?>
-
-
-<body class="bg-white">
+<body>
 
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
@@ -67,7 +58,6 @@ $sql_query = mysqli_query($conn, $retreive);
         </form>
     </div><!-- End Search Bar -->
 
-
     <nav class="header-nav ms-auto">
         <ul class="d-flex align-items-center">
 
@@ -76,7 +66,6 @@ $sql_query = mysqli_query($conn, $retreive);
                     <i class="bi bi-search"></i>
                 </a>
             </li><!-- End Search Icon-->
-
 
             <li class="nav-item dropdown">
 
@@ -153,18 +142,97 @@ $sql_query = mysqli_query($conn, $retreive);
 
             </li><!-- End Notification Nav -->
 
+            <li class="nav-item dropdown">
+
+                <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+                    <i class="bi bi-chat-left-text"></i>
+                    <span class="badge bg-success badge-number">3</span>
+                </a><!-- End Messages Icon -->
+
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
+                    <li class="dropdown-header">
+                        You have 4 new messages
+                        <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li class="message-item">
+                        <a href="#">
+                            <img src="assets/img/messages-1.jpg" alt="" class="rounded-circle">
+                            <div>
+                                <h4>Gilbert</h4>
+                                <p>Hurry for the project</p>
+                                <p>4 hrs. ago</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li class="message-item">
+                        <a href="#">
+                            <img src="assets/img/messages-1.jpg" alt="" class="rounded-circle">
+                            <div>
+                                <h4>Mourisha</h4>
+                                <p>Hurry for the project</p>
+                                <p>4 hrs. ago</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li class="message-item">
+                        <a href="#">
+                            <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
+                            <div>
+                                <h4>Bella</h4>
+                                <p>Hurry for the project</p>
+                                <p>6 hrs. ago</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li class="message-item">
+                        <a href="#">
+                            <img src="assets/img/messages-3.jpg" alt="" class="rounded-circle">
+                            <div>
+                                <h4>Denish</h4>
+                                <p>Hurry for the project</p>
+                                <p>8 hrs. ago</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li class="dropdown-footer">
+                        <a href="#">Show all messages</a>
+                    </li>
+
+                </ul><!-- End Messages Dropdown Items -->
+
+            </li><!-- End Messages Nav -->
+
             <li class="nav-item dropdown pe-3">
 
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                     <img src="assets/img/profile.jpg" alt="Profile" class="rounded-circle">
-                    <span class="d-none d-md-block dropdown-toggle ps-2"><?=$_SESSION['names']?></span>
+                    <span class="d-none d-md-block dropdown-toggle ps-2"><h6><?=$_SESSION['names']?></h6></span>
                 </a><!-- End Profile Iamge Icon -->
 
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                     <li class="dropdown-header">
                         <h6><?=$_SESSION['names']?></h6>
-
-                        <span>Farmer</span>
+                        <span>Vet Doctor</span>
                     </li>
                     <li>
                         <hr class="dropdown-divider">
@@ -215,10 +283,11 @@ $sql_query = mysqli_query($conn, $retreive);
               <img src="assets/img/profile.jpg" alt="Profile" class="rounded-circle">
             </a>
         </li> -->
+
         <li class="nav-item">
-            <a class="nav-link " href="farmer_page.php">
+            <a class="nav-link " href="doctor_page.php">
                 <i class="fa fa-home" aria-hidden="true"></i>
-                <span>Farmer Dashboard</span>
+                <span>Doctor Dashboard</span>
             </a>
         </li><!-- End Dashboard Nav -->
 
@@ -237,32 +306,18 @@ $sql_query = mysqli_query($conn, $retreive);
         </li><!-- End appointment Page Nav -->
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="pages-payment.php">
-                <i class="fa fa-usd" aria-hidden="true"></i>
-                <span>Payments</span>
+            <a class="nav-link collapsed" href="pages-diseases.php">
+                <i class="fa fa-bug" aria-hidden="true"></i>
+                <span>Reported Diseases</span>
             </a>
-        </li><!-- End payments Page Nav -->
-
+        </li><!-- End Diseases Page Nav -->
 
         <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-                <i class="fa fa-wrench" aria-hidden="true"></i>
-                <span>Services</span><i class="bi bi-chevron-down ms-auto"></i>
+            <a class="nav-link collapsed" href="pages-reports.php">
+                <i class="fa fa-flag" aria-hidden="true"></i>
+                <span>Reports</span>
             </a>
-            <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                <li>
-                    <a href="pages-makeappointment.php">
-                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i><span>Make Appointment</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="pages-reportdisease.php">
-                        <i class="fa fa-bug" aria-hidden="true"></i><span>Report Disease</span>
-                    </a>
-                </li>
-            </ul>
-        </li><!-- End Services Nav -->
+        </li><!-- End Reports Page Nav -->
 
         <li class="nav-item">
             <a class="nav-link collapsed" href="pages-messages.php">

@@ -5,6 +5,8 @@ function get_pending_txs($con) {
     $query = mysqli_query($con, "select id, receipt from payments where status = 0") or die(mysqli_error($con));
     while($row = mysqli_fetch_array($query)) {
         $data = send_payload($row['receipt']);
+        if (! $data->message->code)
+            continue;
         $status = $data->message->code;
         if ($status == 200) {
             $s = 0;
@@ -33,7 +35,7 @@ function send_payload($tx) {
         CURLOPT_FOLLOWLOCATION => true,
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => 'POST',
-        CURLOPT_POSTFIELDS =>'{"tx" : "123d3a14db60fc13b9e3e5f6c11e334d6401bf90ce96da9b7442ac65a9ab92ae"}',
+        CURLOPT_POSTFIELDS =>'{"tx" : "' . $tx . '"}',
         CURLOPT_HTTPHEADER => array(
             'User-Access-Key: e9ac6bc84d2c30cc8b73d7299faf47af0503df6ac56cb024b71034fe1f38a95a',
             'Project-Sid: 9b43ba9acaf9228b15a1ac6fe11e4f39812454eae1854610571ec756b35b7d69',

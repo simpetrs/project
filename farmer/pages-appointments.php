@@ -108,7 +108,7 @@ include_once "../header.php";
 
 <script>
     function makePayment(id, doctor) {
-        let amount = 1500
+        let amount = 1000
         let html = `
         <form method="post" action="payment.php" >
 <p>Hello, by making this payment, you are completing your appointment to <b>` + doctor +` </b>
