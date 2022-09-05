@@ -334,30 +334,6 @@ INSERT INTO `payments` VALUES (1,9,1000,6,'2022-09-01','2022-09-01','ad203a31c5b
 UNLOCK TABLES;
 
 --
--- Table structure for table `service`
---
-
-DROP TABLE IF EXISTS `service`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `service` (
-  `service_Id` varchar(50) NOT NULL,
-  `service_Name` text NOT NULL,
-  `service_description` text NOT NULL,
-  `doctor_Id` varchar(50) NOT NULL COMMENT '{fk}'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ];
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `service`
---
-
-LOCK TABLES `service` WRITE;
-/*!40000 ALTER TABLE `service` DISABLE KEYS */;
-/*!40000 ALTER TABLE `service` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `user`
 --
 
@@ -399,4 +375,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-05 13:26:53
+-- Dump completed on 2022-09-05 13:38:36
