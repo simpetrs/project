@@ -142,96 +142,16 @@ include_once '../config.php';
 
             </li><!-- End Notification Nav -->
 
-            <li class="nav-item dropdown">
-
-                <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-                    <i class="bi bi-chat-left-text"></i>
-                    <span class="badge bg-success badge-number">3</span>
-                </a><!-- End Messages Icon -->
-
-                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-                    <li class="dropdown-header">
-                        You have 4 new messages
-                        <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-
-                    <li class="message-item">
-                        <a href="#">
-                            <img src="assets/img/messages-1.jpg" alt="" class="rounded-circle">
-                            <div>
-                                <h4>Gilbert</h4>
-                                <p>Hurry for the project</p>
-                                <p>4 hrs. ago</p>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-
-                    <li class="message-item">
-                        <a href="#">
-                            <img src="assets/img/messages-1.jpg" alt="" class="rounded-circle">
-                            <div>
-                                <h4>Mourisha</h4>
-                                <p>Hurry for the project</p>
-                                <p>4 hrs. ago</p>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-
-                    <li class="message-item">
-                        <a href="#">
-                            <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
-                            <div>
-                                <h4>Bella</h4>
-                                <p>Hurry for the project</p>
-                                <p>6 hrs. ago</p>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-
-                    <li class="message-item">
-                        <a href="#">
-                            <img src="assets/img/messages-3.jpg" alt="" class="rounded-circle">
-                            <div>
-                                <h4>Denish</h4>
-                                <p>Hurry for the project</p>
-                                <p>8 hrs. ago</p>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-
-                    <li class="dropdown-footer">
-                        <a href="#">Show all messages</a>
-                    </li>
-
-                </ul><!-- End Messages Dropdown Items -->
-
-            </li><!-- End Messages Nav -->
-
             <li class="nav-item dropdown pe-3">
 
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                     <img src="assets/img/profile.jpg" alt="Profile" class="rounded-circle">
-                    <span class="d-none d-md-block dropdown-toggle ps-2">Simon Peter</span>
+                    <span class="d-none d-md-block dropdown-toggle ps-2"><?=$_SESSION['names']?></span>
                 </a><!-- End Profile Iamge Icon -->
 
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                     <li class="dropdown-header">
-                        <h6>Simon Peter</h6>
+                        <h6><?=$_SESSION['names']?></h6>
                         <span>Admin</span>
                     </li>
                     <li>
@@ -326,13 +246,12 @@ include_once '../config.php';
                 <span>Reports</span>
             </a>
         </li><!-- End Reports Page Nav -->
-
         <li class="nav-item">
-            <a class="nav-link collapsed" href="pages-messages.php">
-                <i class="bi bi-envelope"></i>
-                <span>Messages</span>
+            <a class="nav-link collapsed" href="payments.php">
+                <i class="fa fa-money" aria-hidden="true"></i>
+                <span>Payments</span>
             </a>
-        </li><!-- End messages Page Nav -->
+        </li><!-- End Reports Page Nav -->
         <li class="nav-item">
             <a class="nav-link collapsed" href="pages-calender.php">
                 <i class="fa fa-calendar" aria-hidden="true"></i>

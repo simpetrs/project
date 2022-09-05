@@ -1,5 +1,6 @@
 <?php
 include_once "../admin_header.php";
+//include_once "../config.php";
 ?>
 
 <?php
@@ -18,6 +19,9 @@ $countfar = mysqli_num_rows($sql_query1);
 $select4 = "SELECT * FROM appointment";
 $sql_query4 = mysqli_query($conn, $select4);
 $countapp = mysqli_num_rows($sql_query4);
+
+$report = mysqli_query($conn, "select user_Id, (select count(id) from payments  where status = 1 limit 1) as payments, (select count(id) from animal_disease_cases where 1 limit 1) as cases, (select count(id) from appointment where 1 limit 1) as appointments from user where 1 limit 1") or die(mysqli_error($conn));
+$r = mysqli_fetch_array($report);
 
 //count diseases
 // $select5 = "SELECT * FROM diseases";
@@ -91,14 +95,14 @@ $countapp = mysqli_num_rows($sql_query4);
               <div class="card info-card report-card">
 
                 <div class="card-body">
-                  <h5 class="card-title">Reports</h5>
+                  <h5 class="card-title">Cases Reported</h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                     <i class="fa fa-flag" aria-hidden="true"></i>
                     </div>
                     <div class="ps-3">
-                      <h6><?php echo $countrep; ?></h6>
+                      <h6><?=$r['cases']?></h6>
 
                     </div>
                   </div>
@@ -120,7 +124,7 @@ $countapp = mysqli_num_rows($sql_query4);
                     <i class="fa fa-usd" aria-hidden="true"></i>
                     </div>
                     <div class="ps-3">
-                      <h6><?php echo $countpay; ?></h6>
+                      <h6><?php echo $r['payments']; ?></h6>
                     </div>
                   </div>
                 </div>
@@ -140,7 +144,7 @@ $countapp = mysqli_num_rows($sql_query4);
                     <i class="fa fa-plus-square" aria-hidden="true"></i>
                     </div>
                     <div class="ps-3">
-                      <h6><?php echo $countapp; ?></h6>
+                      <h6><?php echo $r['appointments']; ?></h6>
                     </div>
                   </div>
                 </div>
@@ -169,105 +173,6 @@ $countapp = mysqli_num_rows($sql_query4);
             </div>End Appointments Card -->
             
 
-            <!-- Reports -->
-            <div class="col-12">
-              <div class="card">
-
-                <div class="card-body">
-                  <h5 class="card-title">Reports</h5>
-
-                  <!-- Line Chart             nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
-                  <div id="reportsChart"></div>
-<!-- 
-                  <script>
-                    document.addEventListener("DOMContentLoaded", () => {
-                      new ApexCharts(document.querySelector("#reportsChart"), {
-                        series: [{
-                          name: 'Sales',
-                          data: [31, 40, 28, 51, 42, 82, 56],
-                        }, {
-                          name: 'Revenue',
-                          data: [11, 32, 45, 32, 34, 52, 41]
-                        }, {
-                          name: 'Customers',
-                          data: [15, 11, 32, 18, 9, 24, 11]
-                        }],
-                        chart: {
-                          height: 350,
-                          type: 'area',
-                          toolbar: {
-                            show: false
-                          },
-                        },
-                        markers: {
-                          size: 4
-                        },
-                        colors: ['#4154f1', '#2eca6a', '#ff771d'],
-                        fill: {
-                          type: "gradient",
-                          gradient: {
-                            shadeIntensity: 1,
-                            opacityFrom: 0.3,
-                            opacityTo: 0.4,
-                            stops: [0, 90, 100]
-                          }
-                        },
-                        dataLabels: {
-                          enabled: false
-                        },
-                        stroke: {
-                          curve: 'smooth',
-                          width: 2
-                        },
-                        xaxis: {
-                          type: 'datetime',
-                          categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
-                        },
-                        tooltip: {
-                          x: {
-                            format: 'dd/MM/yy HH:mm'
-                          },
-                        }
-                      }).render();
-                    });
-                  </script>
-                  End Line Chart -->
-
-                </div>
-
-              </div>
-            </div><!-- End Reports -->
-
-            <!-- registered doctors -->
-            <div class="col-12">
-              <div class="card new-doctors overflow-auto">
-
-                <div class="card-body">
-                  <h5 class="card-title"></h5>
-
-                  <!-- <table class="table table-borderless datatable">
-                    <thead>
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Status</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                      </tr>
-                    </tbody>
-                  </table> -->
-
-                </div>
-
-              </div>
-            </div><!-- End registered doctors -->
 
 
           </div>
@@ -349,18 +254,19 @@ $countapp = mysqli_num_rows($sql_query4);
             <div class="card-body pb-0">
               <h5 class="card-title">Emergencies</h5>
 
-              <div class="news">
-                <div class="post-item clearfix">
-                  <img src="assets/img/.jpg" alt="">
-                  <h4><a href="#">mmmmmmmmmm</a></h4>
-                  <p>mmmmmmmmmmmmmmmmmmmmmmm</p>
-                </div>
-
-                <div class="post-item clearfix">
-                  <img src="assets/img/.jpg" alt="">
-                  <h4><a href="#">mmmmmmmmmm</a></h4>
-                  <p>mmmmmmmmmmmmmmmmmmmmmmm</p>
-                </div>
+              <div class="news row">
+                  <?php
+                  $data = mysqli_query($conn, "select disease_case, animal_disease_cases.date_added, animal_disease_cases.location,animal_disease_cases.date_added, (select animal from animals where id = animal_disease_cases.animal) as animal, (select name from user where user_Id = animal_disease_cases.user) as farmer from animal_disease_cases order by id desc limit 5") or die(mysqli_error($conn));
+                  while ($row = mysqli_fetch_array($data)) {
+                      ?>
+                      <div class="col-md-12 border-0 border-bottom border-secondary mb-2">
+                          <small>
+                              <?=$row['disease_case']?> >> <?=$row['date_added']?> from <?=$row['farmer']?>
+                          </small>
+                      </div>
+                  <?php
+                  }
+                  ?>
 
               </div><!-- End sidebar recent posts-->
 
