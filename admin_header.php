@@ -8,7 +8,6 @@ include_once '../config.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -71,71 +70,55 @@ include_once '../config.php';
 
                 <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
                     <i class="fa fa-bell" aria-hidden="true"></i>
-                    <span class="badge bg-primary badge-number">4</span>
+                    <span class="badge bg-primary badge-number"></span>
                 </a><!-- End Notification Icon -->
 
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
                     <li class="dropdown-header">
-                        You have 4 new notifications
-                        <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+                        You have  new notifications
                     </li>
                     <li>
                         <hr class="dropdown-divider">
-                    </li>
-
-                    <li class="notification-item">
-                        <i class="bi bi-exclamation-circle text-warning"></i>
-                        <div>
-                            <h4>team</h4>
-                            <p>Project</p>
-                            <p>30 min. ago</p>
-                        </div>
                     </li>
 
                     <li>
                         <hr class="dropdown-divider">
                     </li>
 
-                    <li class="notification-item">
-                        <i class="bi bi-x-circle text-danger"></i>
-                        <div>
-                            <h4>All</h4>
-                            <p>Project</p>
-                            <p>1 hr. ago</p>
-                        </div>
-                    </li>
 
                     <li>
                         <hr class="dropdown-divider">
                     </li>
+                    <?php
+                    $data = mysqli_query($conn, "select name, date_added, amount from payments left join user on user.user_Id = payments.user where status = 1")
+                    ?>
 
+                            <?php
+                            while($row = mysqli_fetch_array($data)) {
+                                ?>
                     <li class="notification-item">
                         <i class="bi bi-check-circle text-success"></i>
                         <div>
-                            <h4>Us</h4>
-                            <p>Project</p>
-                            <p>2 hrs. ago</p>
+                                <h4>Payment</h4>
+                                <p>Amount of <?=$row['amount']?> has been paid for an appointment from <?=$row['name']?></p>
+                                <p><?=$row['date_added']?></p>
                         </div>
                     </li>
+                            <?php
+                            }
+                            ?>
+
 
                     <li>
                         <hr class="dropdown-divider">
                     </li>
 
-                    <li class="notification-item">
-                        <i class="bi bi-info-circle text-primary"></i>
-                        <div>
-                            <h4>we</h4>
-                            <p>Project</p>
-                            <p>4 hrs. ago</p>
-                        </div>
-                    </li>
 
                     <li>
                         <hr class="dropdown-divider">
                     </li>
                     <li class="dropdown-footer">
-                        <a href="#">Show all notifications</a>
+                        <a href="./notifications.php">Show all notifications</a>
                     </li>
 
                 </ul><!-- End Notification Dropdown Items -->
