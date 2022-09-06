@@ -236,12 +236,6 @@ include_once '../config.php';
         </li><!-- End Diseases Page Nav -->
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="pages-reports.php">
-                <i class="fa fa-flag" aria-hidden="true"></i>
-                <span>Reports</span>
-            </a>
-        </li><!-- End Reports Page Nav -->
-        <li class="nav-item">
             <a class="nav-link collapsed" href="payments.php">
                 <i class="fa fa-money" aria-hidden="true"></i>
                 <span>Payments</span>

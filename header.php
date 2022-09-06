@@ -41,6 +41,8 @@ include_once './config.php';
 
     <!-- Template Main CSS File -->
     <link href="assets/css/main.css" rel="stylesheet">
+    <link href='../lib/main.css' rel='stylesheet' />
+    <script src='../lib/main.js'></script>
 </head>
 
 
