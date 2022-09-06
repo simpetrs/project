@@ -41,7 +41,7 @@ $sql_query = mysqli_query($conn, $retreive);
                                 <td><?php   echo $rows['name']; ?></td>
                                 <td><?php   echo $rows['email']; ?></td>
                                 <td><?php   echo $rows['phone']; ?></td>
-                                <td><a href="./toggle-users.php?toggle=1&user=<?=$rows['user_Id']?>">Make Doctor</a> </td>
+                                <td><a href="./toggle-users.php?toggle=1&user=<?=$rows['user_Id']?>" onclick="return preventAction()">Make Doctor</a> </td>
                                 <?php
                         // $userId = $rows['userId'];
 

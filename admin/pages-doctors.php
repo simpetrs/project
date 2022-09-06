@@ -42,7 +42,7 @@ $sql_query = mysqli_query($conn, $retreive);
                                 <td><?php   echo $rows['name']; ?></td>
                                 <td><?php   echo $rows['email']; ?></td>
                                 <td><?php   echo $rows['phone']; ?></td>
-                                <td><a href="./toggle-users.php?toggle=2&user=<?=$rows['user_Id']?>">Drop</a> </td>
+                                <td><a href="./toggle-users.php?toggle=2&user=<?=$rows['user_Id']?>" onclick="return preventAction()">Drop</a> </td>
                                 <?php
                     ?>
                             </tr>

@@ -41,7 +41,7 @@ $sql_query = mysqli_query($conn, $retreive);
                                     <td><?php   echo $rows['name']; ?></td>
                                     <td><?php   echo $rows['email']; ?></td>
                                     <td><?php   echo $rows['phone']; ?></td>
-                                    <td><a href="./toggle-users.php?delete=xx&user=<?=$rows['user_Id']?>">Delete</a> </td>
+                                    <td><a href="./toggle-users.php?delete=xx&user=<?=$rows['user_Id']?>" onclick="return preventAction()">Delete</a> </td>
                                     <?php
                                     // $userId = $rows['userId'];
 

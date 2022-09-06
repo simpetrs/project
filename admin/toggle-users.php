@@ -14,7 +14,9 @@ if (isset($_GET['toggle']) and isset($_GET['user']) and isset($_SESSION['user_Id
 
 if (isset($_GET['delete'])) {
     $user = $_GET['user'];
-    $x = $_GET['delete'] == 'xx' ? 1 : 0;
-    mysqli_query($conn, "update user set deleted = '$x' where user_Id = '$user'") or die(mysqli_error($conn));
+    if ($user != $_SESSION['user_Id']) {
+        $x = $_GET['delete'] == 'xx' ? 1 : 0;
+        mysqli_query($conn, "update user set deleted = '$x' where user_Id = '$user'") or die(mysqli_error($conn));
+    }
     header("location:" . $_SERVER['HTTP_REFERER']); exit;
 }

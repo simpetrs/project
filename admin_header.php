@@ -41,6 +41,15 @@ include_once '../config.php';
     <link rel="stylesheet" href="assets/vendor/font-awesome/css/font-awesome.min.css">
     <!-- Template Main CSS File -->
     <link href="assets/css/main.css" rel="stylesheet">
+    <script>
+        function preventAction(e) {
+          let c = confirm("Are you sure you want continue with this action?")
+            if(c === false || c === null) {
+                return false
+            }
+            return true
+        }
+    </script>
 
 </head>
 <body>
