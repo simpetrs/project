@@ -13,7 +13,7 @@ include_once  "../admin_header.php";
         </div><!-- End Page Title -->
 
     </div>
-    <div class="col-12">
+    <div class="col-12 bg-white">
         <div id='calendar'></div>
     </div>
 
