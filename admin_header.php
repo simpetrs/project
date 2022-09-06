@@ -36,7 +36,8 @@ include_once '../config.php';
     <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
     <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
     <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
-
+    <link href='../lib/main.css' rel='stylesheet' />
+    <script src='../lib/main.js'></script>
     <link rel="stylesheet" href="assets/vendor/font-awesome/css/font-awesome.min.css">
     <!-- Template Main CSS File -->
     <link href="assets/css/main.css" rel="stylesheet">
