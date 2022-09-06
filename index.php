@@ -7,7 +7,7 @@ if(isset($_POST['submit'])){
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $password = hash("sha256", $_POST['password']);
 
-    $select = " SELECT * FROM user WHERE email='$email' AND password='$password' ";
+    $select = " SELECT * FROM user WHERE email='$email' AND password='$password' and deleted = 0 ";
 
     $result = mysqli_query($conn, $select) or die(mysqli_error($conn));
 
@@ -20,16 +20,19 @@ if(isset($_POST['submit'])){
               
             $_SESSION['names'] = $row['name'];
             $_SESSION['user_Id'] = $row['user_Id'];
+            $_SESSION['role'] = 1;
             header('location:admin/admin_page.php');
 
         }elseif($row['user_type'] == 'doctor'){
             $_SESSION['user_Id'] = $row['user_Id'];
             $_SESSION['names'] = $row['name'];
+            $_SESSION['role'] = 2;
             header('location:doctor/doctor_page.php');
 
         }elseif($row['user_type'] == 'farmer'){
             $_SESSION['user_Id'] = $row['user_Id'];
             $_SESSION['names'] = $row['name'];
+            $_SESSION['role'] = 3;
             header('location:farmer/farmer_page.php');
         } 
 

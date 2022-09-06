@@ -28,24 +28,24 @@ $sql_query = mysqli_query($conn, $retreive);
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Phone</th>
+                          <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <?php 
+                        <?php
+                        $i = 1;
                   while ($rows = mysqli_fetch_assoc($sql_query) ) {
                   ?>
                             <tr>
-                                <td><?php   echo $rows['user_Id']; ?></td>
+                                <td><?=$i++?></td>
                                 <td><?php   echo $rows['name']; ?></td>
                                 <td><?php   echo $rows['email']; ?></td>
                                 <td><?php   echo $rows['phone']; ?></td>
+                                <td><a href="./toggle-users.php?toggle=1&user=<?=$rows['user_Id']?>">Make Doctor</a> </td>
                                 <?php
                         // $userId = $rows['userId'];
 
-                        include 'config.php';
-                        $retreive1 = "SELECT * FROM  user WHERE user_Type = 'farmer'";
-                        $sql_query1 = mysqli_query($conn, $retreive1);
-                        $rows1 = mysqli_fetch_assoc($sql_query1);
+
                     ?>
                             </tr>
                             <?php   

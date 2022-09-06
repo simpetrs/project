@@ -1,5 +1,6 @@
 <?php
 include_once "../header_doctor.php";
+$user = $_SESSION['user_Id'];
 ?>
   <main id="main" class="main">
 
@@ -9,6 +10,10 @@ include_once "../header_doctor.php";
               <div class="card">
                 <div class="pagetitle">                                
                   <h1>Doctor Dashboard</h1>
+                    <?php
+                    $query = mysqli_query($conn, "Select user_Id, (select count(appointment.id) from appointment left join payments on payments.appointment = appointment.id  where doctor = '$user' and payments.status = 1) as appointments, (select count(appointment.id) from appointment left join payments on payments.appointment = appointment.id  where doctor = '$user' and payments.status = 1 and appointment.status = 1) as approved, (select count(id) from messages where sender = '$user') as messages  from user where user_Id = '$user' limit 1") or die(mysqli_error($conn));
+                    $row = mysqli_fetch_array($query);
+                    ?>
                 </div>
               </div><!-- End Page Title -->
 
@@ -24,14 +29,14 @@ include_once "../header_doctor.php";
               <div class="card info-card doctor-card">
 
                 <div class="card-body">
-                  <h5 class="card-title">Doctors</h5>
+                  <h5 class="card-title">Appointment requests</h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                       <i class="bi bi-people"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>145</h6>
+                        <h6><?=$row['appointments']?></h6>
                     </div>
                   </div>
                 </div>
@@ -44,14 +49,14 @@ include_once "../header_doctor.php";
               <div class="card info-card farmer-card">
 
                 <div class="card-body">
-                  <h5 class="card-title">Farmers</h5>
+                  <h5 class="card-title">Appointment approved</h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-people"></i>
+                      <i class="bi bi-check-circle"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>264</h6>
+                      <h6> <?=$row['approved']?></h6>
 
                     </div>
                   </div>
@@ -66,15 +71,14 @@ include_once "../header_doctor.php";
               <div class="card info-card report-card">
 
                 <div class="card-body">
-                  <h5 class="card-title">Reports</h5>
+                  <h5 class="card-title">Messages / Notes sent</h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                       <i class="bi bi-people"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>44</h6>
-
+                      <h6><?=$row['messages']?></h6>
                     </div>
                   </div>
 
@@ -82,230 +86,6 @@ include_once "../header_doctor.php";
               </div>
 
             </div><!-- End Reports Card -->
-
-            <!-- Reported Diseases Card -->
-            <div class="col-xxl-4 col-md-6">
-              <div class="card info-card doctor-card">
-
-                <div class="card-body">
-                  <h5 class="card-title">Reported Diseases</h5>
-
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-people"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6>14</h6>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div><!-- End Reported Diseases Card -->
-
-            <!-- Appointments Card -->
-            <div class="col-xxl-4 col-md-6">
-              <div class="card info-card doctor-card">
-
-                <div class="card-body">
-                  <h5 class="card-title">Appointments</h5>
-
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-people"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6>4</h6>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div><!-- End Appointments Card -->
-
-            
-
-            <!-- Reports -->
-            <div class="col-12">
-              <div class="card">
-
-                <div class="card-body">
-                  <h5 class="card-title">Reports</h5>
-
-                  <!-- Line Chart             nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-->
-                  <div id="reportsChart"></div>
-<!-- 
-                  <script>
-                    document.addEventListener("DOMContentLoaded", () => {
-                      new ApexCharts(document.querySelector("#reportsChart"), {
-                        series: [{
-                          name: 'Sales',
-                          data: [31, 40, 28, 51, 42, 82, 56],
-                        }, {
-                          name: 'Revenue',
-                          data: [11, 32, 45, 32, 34, 52, 41]
-                        }, {
-                          name: 'Customers',
-                          data: [15, 11, 32, 18, 9, 24, 11]
-                        }],
-                        chart: {
-                          height: 350,
-                          type: 'area',
-                          toolbar: {
-                            show: false
-                          },
-                        },
-                        markers: {
-                          size: 4
-                        },
-                        colors: ['#4154f1', '#2eca6a', '#ff771d'],
-                        fill: {
-                          type: "gradient",
-                          gradient: {
-                            shadeIntensity: 1,
-                            opacityFrom: 0.3,
-                            opacityTo: 0.4,
-                            stops: [0, 90, 100]
-                          }
-                        },
-                        dataLabels: {
-                          enabled: false
-                        },
-                        stroke: {
-                          curve: 'smooth',
-                          width: 2
-                        },
-                        xaxis: {
-                          type: 'datetime',
-                          categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
-                        },
-                        tooltip: {
-                          x: {
-                            format: 'dd/MM/yy HH:mm'
-                          },
-                        }
-                      }).render();
-                    });
-                  </script>
-                  End Line Chart -->
-
-                </div>
-
-              </div>
-            </div><!-- End Reports -->
-
-            <!-- registered doctors -->
-            <div class="col-12">
-              <div class="card new-doctors overflow-auto">
-
-                <div class="card-body">
-                  <h5 class="card-title"></h5>
-
-                </div>
-
-              </div>
-            </div><!-- End registered doctors -->
-
-
-          </div>
-        </div><!-- End Left side columns -->
-
-        <!-- Right side columns -->
-        <div class="col-lg-4">
-
-          <!-- Daily system usage -->
-          <div class="card">
-            
-            <div class="card-body pb-0">
-              <h5 class="card-title">System Activities</h5>
-
-              <div id="trafficChart" style="min-height: 400px;" class="echart"></div>
-
-              <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                  echarts.init(document.querySelector("#trafficChart")).setOption({
-                    tooltip: {
-                      trigger: 'item'
-                    },
-                    legend: {
-                      top: '5%',
-                      left: 'center'
-                    },
-                    series: [{
-                      name: 'Access From',
-                      type: 'pie',
-                      radius: ['40%', '70%'],
-                      avoidLabelOverlap: false,
-                      label: {
-                        show: false,
-                        position: 'center'
-                      },
-                      emphasis: {
-                        label: {
-                          show: true,
-                          fontSize: '18',
-                          fontWeight: 'bold'
-                        }
-                      },
-                      labelLine: {
-                        show: false
-                      },
-                      data: [{
-                          value: 1048,
-                          name: 'Notifications'
-                        },
-                        {
-                          value: 735,
-                          name: 'Reports'
-                        },
-                        {
-                          value: 580,
-                          name: 'Online Doctors'
-                        },
-                        {
-                          value: 484,
-                          name: 'Online Farmers'
-                        },
-                        {
-                          value: 300,
-                          name: 'Appoitments'
-                        }
-                      ]
-                    }]
-                  });
-                });
-              </script>
-
-            </div>
-          </div><!-- End Daily system usage -->
-
-
-          <!-- News & Updates Traffic -->
-          <div class="card">
-          
-            <div class="card-body pb-0">
-              <h5 class="card-title">Emergencies</h5>
-
-              <div class="news">
-                <div class="post-item clearfix">
-                  <img src="assets/img/.jpg" alt="">
-                  <h4><a href="#">mmmmmmmmmm</a></h4>
-                  <p>mmmmmmmmmmmmmmmmmmmmmmm</p>
-                </div>
-
-                <div class="post-item clearfix">
-                  <img src="assets/img/.jpg" alt="">
-                  <h4><a href="#">mmmmmmmmmm</a></h4>
-                  <p>mmmmmmmmmmmmmmmmmmmmmmm</p>
-                </div>
-
-              </div><!-- End sidebar recent posts-->
-
-            </div>
-          </div><!-- End New diseases -->
-
-        </div><!-- End Right side columns -->
-
       </div>
     </section>
 

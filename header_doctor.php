@@ -4,6 +4,10 @@ if (! isset($_SESSION['user_Id'])) {
     header("location:../index.php");
     exit;
 }
+if ($_SESSION['role'] != 2){
+    header("location:../logout.php");
+    exit;
+}
 include_once '../config.php';
 ?>
 <!DOCTYPE html>
@@ -23,7 +27,7 @@ include_once '../config.php';
     <link href="https://fonts.gstatic.com" rel="preconnect">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
-    <!-- Vendor CSS Files -->
+    <!--Vendor CSS Files -->
     <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
@@ -71,156 +75,46 @@ include_once '../config.php';
 
                 <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
                     <i class="fa fa-bell" aria-hidden="true"></i>
-                    <span class="badge bg-primary badge-number">4</span>
+                    <span class="badge bg-primary badge-number"></span>
                 </a><!-- End Notification Icon -->
 
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
                     <li class="dropdown-header">
-                        You have 4 new notifications
+                        Notifications
                         <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
                     </li>
                     <li>
                         <hr class="dropdown-divider">
                     </li>
 
-                    <li class="notification-item">
-                        <i class="bi bi-exclamation-circle text-warning"></i>
-                        <div>
-                            <h4>team</h4>
-                            <p>Project</p>
-                            <p>30 min. ago</p>
-                        </div>
-                    </li>
+                    <?php
+                    $data = mysqli_query($conn, "select name, appointment.date_added, amount from payments left join user on user.user_Id = payments.user left join appointment on appointment.id = payments.appointment where payments.status = 1 and doctor = '" . $_SESSION['user_Id'] . "' order by payments.id desc") or die(mysqli_error($conn));
+                    ?>
 
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-
-                    <li class="notification-item">
-                        <i class="bi bi-x-circle text-danger"></i>
-                        <div>
-                            <h4>All</h4>
-                            <p>Project</p>
-                            <p>1 hr. ago</p>
-                        </div>
-                    </li>
-
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-
-                    <li class="notification-item">
-                        <i class="bi bi-check-circle text-success"></i>
-                        <div>
-                            <h4>Us</h4>
-                            <p>Project</p>
-                            <p>2 hrs. ago</p>
-                        </div>
-                    </li>
-
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-
-                    <li class="notification-item">
-                        <i class="bi bi-info-circle text-primary"></i>
-                        <div>
-                            <h4>we</h4>
-                            <p>Project</p>
-                            <p>4 hrs. ago</p>
-                        </div>
-                    </li>
-
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
+                    <?php
+                    while($row = mysqli_fetch_array($data)) {
+                        ?>
+                        <li class="notification-item">
+                            <i class="bi bi-check-circle text-success"></i>
+                            <div>
+                                <h4>Appointment</h4>
+                                <p><a href="./pages-appointments.php"><?=$row['name']?> has requested for an appointment</a></p>
+                                <p><?=$row['date_added']?></p>
+                            </div>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <?php
+                    }
+                    ?>
                     <li class="dropdown-footer">
-                        <a href="#">Show all notifications</a>
+                        <a href="./pages-appointments.php">Go to appointments</a>
                     </li>
 
                 </ul><!-- End Notification Dropdown Items -->
 
             </li><!-- End Notification Nav -->
-
-            <li class="nav-item dropdown">
-
-                <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-                    <i class="bi bi-chat-left-text"></i>
-                    <span class="badge bg-success badge-number">3</span>
-                </a><!-- End Messages Icon -->
-
-                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-                    <li class="dropdown-header">
-                        You have 4 new messages
-                        <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-
-                    <li class="message-item">
-                        <a href="#">
-                            <img src="assets/img/messages-1.jpg" alt="" class="rounded-circle">
-                            <div>
-                                <h4>Gilbert</h4>
-                                <p>Hurry for the project</p>
-                                <p>4 hrs. ago</p>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-
-                    <li class="message-item">
-                        <a href="#">
-                            <img src="assets/img/messages-1.jpg" alt="" class="rounded-circle">
-                            <div>
-                                <h4>Mourisha</h4>
-                                <p>Hurry for the project</p>
-                                <p>4 hrs. ago</p>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-
-                    <li class="message-item">
-                        <a href="#">
-                            <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
-                            <div>
-                                <h4>Bella</h4>
-                                <p>Hurry for the project</p>
-                                <p>6 hrs. ago</p>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-
-                    <li class="message-item">
-                        <a href="#">
-                            <img src="assets/img/messages-3.jpg" alt="" class="rounded-circle">
-                            <div>
-                                <h4>Denish</h4>
-                                <p>Hurry for the project</p>
-                                <p>8 hrs. ago</p>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-
-                    <li class="dropdown-footer">
-                        <a href="#">Show all messages</a>
-                    </li>
-
-                </ul><!-- End Messages Dropdown Items -->
-
-            </li><!-- End Messages Nav -->
 
             <li class="nav-item dropdown pe-3">
 

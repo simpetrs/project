@@ -4,6 +4,11 @@ if (! isset($_SESSION['user_Id'])) {
     header("location:../index.php");
     exit;
 }
+
+if ($_SESSION['role'] != 1){
+    header("location:../index.php");
+    exit;
+}
 include_once '../config.php';
 ?>
 <!DOCTYPE html>
@@ -90,7 +95,7 @@ include_once '../config.php';
                         <hr class="dropdown-divider">
                     </li>
                     <?php
-                    $data = mysqli_query($conn, "select name, date_added, amount from payments left join user on user.user_Id = payments.user where status = 1")
+                    $data = mysqli_query($conn, "select name, date_added, amount from payments left join user on user.user_Id = payments.user where status = 1 order by id desc")
                     ?>
 
                             <?php
@@ -104,14 +109,13 @@ include_once '../config.php';
                                 <p><?=$row['date_added']?></p>
                         </div>
                     </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
                             <?php
                             }
                             ?>
 
-
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
 
 
                     <li>
@@ -197,17 +201,25 @@ include_once '../config.php';
 
         <li class="nav-item">
             <a class="nav-link collapsed" href="pages-doctors.php">
-                <i class="fa fa-users" aria-hidden="true"></i>
+                <i class="fa fa-briefcase" aria-hidden="true"></i>
                 <span>Doctors</span>
             </a>
         </li><!-- End Doctors Page Nav -->
 
         <li class="nav-item">
             <a class="nav-link collapsed" href="pages-farmers.php">
-                <i class="fa fa-users" aria-hidden="true"></i>
+                <i class="fa fa-car" aria-hidden="true"></i>
                 <span>Farmers</span>
             </a>
         </li><!-- End Farmers Page Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="all-users.php">
+                <i class="fa fa-group" aria-hidden="true"></i>
+                <span>All users</span>
+            </a>
+        </li><!-- End Farmers Page Nav -->
+
 
         <li class="nav-item">
             <a class="nav-link collapsed" href="pages-appointments.php">

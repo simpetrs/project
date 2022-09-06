@@ -30,6 +30,7 @@ $sql_query = mysqli_query($conn, $retreive);
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Phone</th>
+                            <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -41,13 +42,8 @@ $sql_query = mysqli_query($conn, $retreive);
                                 <td><?php   echo $rows['name']; ?></td>
                                 <td><?php   echo $rows['email']; ?></td>
                                 <td><?php   echo $rows['phone']; ?></td>
+                                <td><a href="./toggle-users.php?toggle=2&user=<?=$rows['user_Id']?>">Drop</a> </td>
                                 <?php
-                        // $userId = $rows['userId'];
-
-                        include 'config.php';
-                        $retreive1 = "SELECT * FROM  user WHERE user_Type = 'doctor'";
-                        $sql_query1 = mysqli_query($conn, $retreive1);
-                        $rows1 = mysqli_fetch_assoc($sql_query1);
                     ?>
                             </tr>
                             <?php   

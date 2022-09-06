@@ -4,6 +4,10 @@ if (! isset($_SESSION['user_Id'])) {
     header("location:../index.php");
     exit;
 }
+if ($_SESSION['role'] != 3){
+    header("location:../logout.php");
+    exit;
+}
 include_once './config.php';
 ?>
 <!DOCTYPE html>
@@ -39,13 +43,6 @@ include_once './config.php';
     <link href="assets/css/main.css" rel="stylesheet">
 </head>
 
-<?php
-
-$userId1 = $_SESSION["userId1"];
-$retreive = "SELECT * FROM appointment WHERE appointment_Id = '$userId1'";
-$sql_query = mysqli_query($conn, $retreive);
-?>
-
 
 <body class="bg-white">
 
@@ -53,7 +50,7 @@ $sql_query = mysqli_query($conn, $retreive);
 <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-        <a href="admin_page.php" class="logo d-flex align-items-center">
+        <a href="farmer_page.php" class="logo d-flex align-items-center">
             <img src="assets/img/logo.png" alt="">
             <span class="d-none d-lg-block">VERMS</span>
         </a>
@@ -82,72 +79,68 @@ $sql_query = mysqli_query($conn, $retreive);
 
                 <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
                     <i class="fa fa-bell" aria-hidden="true"></i>
-                    <span class="badge bg-primary badge-number">4</span>
+                    <span class="badge bg-primary badge-number"></span>
                 </a><!-- End Notification Icon -->
 
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
                     <li class="dropdown-header">
-                        You have 4 new notifications
+                        Notifications
                         <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
                     </li>
                     <li>
                         <hr class="dropdown-divider">
                     </li>
 
-                    <li class="notification-item">
-                        <i class="bi bi-exclamation-circle text-warning"></i>
-                        <div>
-                            <h4>team</h4>
-                            <p>Project</p>
-                            <p>30 min. ago</p>
-                        </div>
-                    </li>
+                    <?php
+                    $data = mysqli_query($conn, "select name, appointment.date_added, appointment.status  from appointment left join user on user.user_Id = appointment.doctor  where  user = '" . $_SESSION['user_Id'] . "' and (status = 1 or status = 2) order by id desc") or die(mysqli_error($conn));
+                    ?>
 
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
+                    <?php
+                    while($row = mysqli_fetch_array($data)) {
+                        ?>
+                        <li class="notification-item">
+                            <i class="bi bi-check-circle text-success"></i>
+                            <div>
+                                <h4>Appointment</h4>
+                                <p><a href="./pages-appointments.php"><?=$row['name']?> has <?=$row['status'] == 1 ? 'Approved' : 'Rejected'?> you appoitnment</a></p>
+                                <p><?=$row['date_added']?></p>
+                            </div>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <?php
+                    }
+                    ?>
 
-                    <li class="notification-item">
-                        <i class="bi bi-x-circle text-danger"></i>
-                        <div>
-                            <h4>All</h4>
-                            <p>Project</p>
-                            <p>1 hr. ago</p>
-                        </div>
-                    </li>
+                    <?php
+                    $data = mysqli_query($conn, "select name, messages.date_added  from messages left join user on user.user_Id = messages.sender  where  receiver = '" . $_SESSION['user_Id'] . "'  order by id desc") or die(mysqli_error($conn));
+                    ?>
 
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
+                    <?php
+                    while($row = mysqli_fetch_array($data)) {
+                        ?>
+                        <li class="notification-item">
+                            <i class="bi bi-check-circle text-success"></i>
+                            <div>
+                                <h4>Note</h4>
+                                <p><a href="./messages.php"><?=$row['name']?> has updated your appointment with a note.</a></p>
+                                <p><?=$row['date_added']?></p>
+                            </div>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <?php
+                    }
+                    ?>
 
-                    <li class="notification-item">
-                        <i class="bi bi-check-circle text-success"></i>
-                        <div>
-                            <h4>Us</h4>
-                            <p>Project</p>
-                            <p>2 hrs. ago</p>
-                        </div>
-                    </li>
 
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
 
-                    <li class="notification-item">
-                        <i class="bi bi-info-circle text-primary"></i>
-                        <div>
-                            <h4>we</h4>
-                            <p>Project</p>
-                            <p>4 hrs. ago</p>
-                        </div>
-                    </li>
 
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li class="dropdown-footer">
-                        <a href="#">Show all notifications</a>
-                    </li>
+
+
+
 
                 </ul><!-- End Notification Dropdown Items -->
 
@@ -258,7 +251,12 @@ $sql_query = mysqli_query($conn, $retreive);
 
                 <li>
                     <a href="pages-reportdisease.php">
-                        <i class="fa fa-bug" aria-hidden="true"></i><span>Report Disease</span>
+                        <i class="fa fa-bug" aria-hidden="true"></i><span>Report Case</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="cases.php">
+                        <i class="fa fa-bug" aria-hidden="true"></i><span>Reported Cases</span>
                     </a>
                 </li>
             </ul>
