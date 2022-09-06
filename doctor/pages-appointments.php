@@ -87,12 +87,7 @@ include_once "../header_doctor.php";
                     </table>
                 </div>
             </div>
-        </div>
-
-
-
-
-              
+        </div>   
 
   </main><!-- End #main -->
 

@@ -52,7 +52,7 @@ include_once '../config.php';
     </script>
 
 </head>
-<body>
+<body class="bg-white">
 
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
@@ -218,7 +218,7 @@ include_once '../config.php';
 
         <li class="nav-item">
             <a class="nav-link collapsed" href="pages-farmers.php">
-                <i class="fa fa-car" aria-hidden="true"></i>
+                <i class="fa fa-group" aria-hidden="true"></i>
                 <span>Farmers</span>
             </a>
         </li><!-- End Farmers Page Nav -->

@@ -1,5 +1,5 @@
 <?php
 
-$conn = mysqli_connect('localhost', 'root', '','verms_db');
+$conn = mysqli_connect('localhost', '', '','verms_db');
 
 ?>

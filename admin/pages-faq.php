@@ -1,5 +1,5 @@
 <?php
-include_once "../header.php";
+include_once "../admin_header.php";
 ?>
   <main id="main" class="main">
 
