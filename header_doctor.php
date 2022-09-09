@@ -44,7 +44,7 @@ include_once '../config.php';
     <link href="assets/css/main.css" rel="stylesheet">
 
 </head>
-<body>
+<body class="bg-white">
 
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
@@ -208,12 +208,12 @@ include_once '../config.php';
             </a>
         </li><!-- End Diseases Page Nav -->
 
-        <li class="nav-item">
+        <!-- <li class="nav-item">
             <a class="nav-link collapsed" href="pages-reports.php">
                 <i class="fa fa-flag" aria-hidden="true"></i>
                 <span>Reports</span>
             </a>
-        </li><!-- End Reports Page Nav -->
+        </li>End Reports Page Nav -->
 
         <li class="nav-item">
             <a class="nav-link collapsed" href="pages-messages.php">
