@@ -20,6 +20,9 @@ include_once "../header_doctor.php";
                     $company  = trim($_POST['company']);
                     $address = trim($_POST['address']);
                     $phone = trim($_POST['phone']);
+                    if (! empty($_FILES['file']['name'])) {
+                        include_once "../upload.php";
+                    }
                     if (empty($names) or empty($phone) or empty($address)) {
                         ?>
                         <div class="alert alert-danger">
@@ -75,7 +78,7 @@ include_once "../header_doctor.php";
                     <div class="card">
                         <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
-                            <img src="assets/img/profile.jpg" alt="Profile" class="rounded-circle">
+                            <img src="assets/img/<?=$rows['photo']?>" alt="<?=$rows['photo']?>" class="rounded-circle">
                             <h2><?=$_SESSION['names']?></h2>
                             <h3></h3>
 
@@ -156,14 +159,15 @@ include_once "../header_doctor.php";
                                 <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
                                     <!-- Profile Edit Form -->
-                                    <form action="" method="post">
+                                    <form action="" method="post" enctype="multipart/form-data">
                                         <div class="row mb-3">
                                             <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
                                             <div class="col-md-8 col-lg-9">
-                                                <img src="assets/img/profile.jpg" alt="Profile">
+                                                <img src="assets/img/<?=$rows['photo']?>" alt="Profile">
                                                 <div class="pt-2">
-                                                    <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></a>
-                                                    <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
+                                                    <label for="fileUpload" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></label>
+                                                    <input type="file" id="fileUpload" name="file" style="display: none" onchange="alert('file has been selected')"/>
+                                                    <a href="../upload.php?delete_pic=<?=$rows['photo']?>" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -282,6 +286,8 @@ include_once "../header_doctor.php";
 <!-- <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a> -->
 
 <!-- Vendor JS Files -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="  crossorigin="anonymous"></script>
+
 <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
 <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="assets/vendor/chart.js/chart.min.js"></script>
@@ -293,6 +299,11 @@ include_once "../header_doctor.php";
 
 <!-- Verms Main JS File -->
 <script src="assets/js/main.js"></script>
+<script>
+    function fileUpload() {
+        alert("File changes ready to submit")
+    }
+</script>
 
 </body>
 

@@ -21,18 +21,21 @@ if(isset($_POST['submit'])){
             $_SESSION['names'] = $row['name'];
             $_SESSION['user_Id'] = $row['user_Id'];
             $_SESSION['role'] = 1;
+            $_SESSION['photo'] = $row['photo'];
             header('location:admin/admin_page.php');
 
         }elseif($row['user_type'] == 'doctor'){
             $_SESSION['user_Id'] = $row['user_Id'];
             $_SESSION['names'] = $row['name'];
             $_SESSION['role'] = 2;
+            $_SESSION['photo'] = $row['photo'];
             header('location:doctor/doctor_page.php');
 
         }elseif($row['user_type'] == 'farmer'){
             $_SESSION['user_Id'] = $row['user_Id'];
             $_SESSION['names'] = $row['name'];
             $_SESSION['role'] = 3;
+            $_SESSION['photo'] = $row['photo'];
             header('location:farmer/farmer_page.php');
         } 
 

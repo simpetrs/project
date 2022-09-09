@@ -58,7 +58,7 @@ include_once '../config.php';
 <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-        <a href="admin_page.php" class="logo d-flex align-items-center">
+        <a href="header_doctor.php" class="logo d-flex align-items-center">
             <img src="assets/img/logo.png" alt="">
             <span class="d-none d-lg-block">VERMS</span>
         </a>
@@ -66,8 +66,8 @@ include_once '../config.php';
     </div><!-- End Logo -->
 
     <div class="search-bar">
-        <form class="search-form d-flex align-items-center" method="POST" action="#">
-            <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+        <form class="search-form d-flex align-items-center" method="get" action="./search.php">
+            <input type="text" name="query" placeholder="Search" title="Enter search keyword" <?=isset($_GET['query']) ? "value='" . $_GET['query'] . "'" : ''?>>
             <button type="submit" title="Search"><i class="bi bi-search"></i></button>
         </form>
     </div><!-- End Search Bar -->
@@ -142,7 +142,7 @@ include_once '../config.php';
             <li class="nav-item dropdown pe-3">
 
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                    <img src="assets/img/profile.jpg" alt="Profile" class="rounded-circle">
+                    <img src="assets/img/<?=$_SESSION['photo']?>" alt="Profile" class="rounded-circle">
                     <span class="d-none d-md-block dropdown-toggle ps-2"><?=$_SESSION['names']?></span>
                 </a><!-- End Profile Iamge Icon -->
 
