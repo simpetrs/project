@@ -14,11 +14,11 @@ include_once "../header.php";
         </div><!-- End Page Title -->
 
         <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="data_table">
-                        <table id="example" class="table table-bordered">
-                            <thead class="table-dark">
+        <div class="row">
+            <div class="col-12">
+            <div class="table-responsive">
+                <table id="datatable" class="table table-striped table-bordered">
+                    <thead class="table-dark">
                             <tr>
                                 <th></th>
                                 <th>From Farmer</th>
@@ -35,7 +35,7 @@ include_once "../header.php";
                             $data = mysqli_query($conn, "select user, disease_case, animal_disease_cases.date_added, animal_disease_cases.location,animal_disease_cases.date_added, (select animal from animals where id = animal_disease_cases.animal) as animal, (select name from user where user_Id = animal_disease_cases.user) as farmer from animal_disease_cases order by id desc") or die(mysqli_error($conn));
                             while ($row = mysqli_fetch_array($data)) {
                                 ?>
-                                <tr class="<?=$user == $row['user'] ?'bg-dark text-white' : ''?>">
+                                <tr class="<?=$user == $row['user'] ?>">
                                     <td><?=$no++?></td>
                                     <td><?=$user == $row['user'] ?'Mine' : $row['farmer']?></td>
                                     <td><?=$row['location']?></td>

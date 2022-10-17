@@ -18,11 +18,11 @@ $sql_query = mysqli_query($conn, $retreive);
         </div><!-- End Page Title -->
 
         <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="data_table">
-                        <table id="example" class="table table-striped table-bordered">
-                            <thead class="table-dark">
+        <div class="row">
+            <div class="col-12">
+                <div class="data_table table-responsive">
+                    <table id="example" class="table table-striped table-bordered">
+                        <thead class="table-dark">
                             <tr>
                                 <th>Id</th>
                                 <th>Name</th>
@@ -41,7 +41,7 @@ $sql_query = mysqli_query($conn, $retreive);
                                     <td><?php   echo $rows['name']; ?></td>
                                     <td><?php   echo $rows['email']; ?></td>
                                     <td><?php   echo $rows['phone']; ?></td>
-                                    <td><a href="./toggle-users.php?delete=xx&user=<?=$rows['user_Id']?>" onclick="return preventAction()">Delete</a> </td>
+                                    <td><a href="./toggle-users.php?delete=xx&user=<?=$rows['user_Id']?>" onclick="return preventAction()"><button class="btn btn-danger">Delete</button></a> </td>
                                     <?php
                                     // $userId = $rows['userId'];
 

@@ -22,7 +22,7 @@ $sql_query = mysqli_query($conn, $retreive);
               <div class="container">
         <div class="row">
             <div class="col-12">
-                <div class="data_table">
+                <div class="data_table table-responsive">
                     <table id="example" class="table table-striped table-bordered">
                         <thead class="table-dark">
                         <tr>
@@ -42,7 +42,7 @@ $sql_query = mysqli_query($conn, $retreive);
                                 <td><?php   echo $rows['name']; ?></td>
                                 <td><?php   echo $rows['email']; ?></td>
                                 <td><?php   echo $rows['phone']; ?></td>
-                                <td><a href="./toggle-users.php?toggle=2&user=<?=$rows['user_Id']?>" onclick="return preventAction()">Drop</a> </td>
+                                <td><a href="./toggle-users.php?toggle=2&user=<?=$rows['user_Id']?>" onclick="return preventAction()"><button class="btn btn-warning">Drop</button></a> </td>
                                 <?php
                     ?>
                             </tr>

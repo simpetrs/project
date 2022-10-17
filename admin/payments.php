@@ -16,10 +16,12 @@ include_once "../admin_header.php";
                 ?>
             </div>
         </div><!-- End Page Title -->
-        <div class="col-12 bg-white p-4">
+        <div class="container">
+        <div class="row">
+            <div class="col-12">
             <div class="table-responsive">
                 <table class="table shadow p-3" id="datatable">
-                    <thead>
+                    <thead class="table-dark">
                     <tr>
                         <th></th>
                         <th>ID</th>
@@ -37,7 +39,7 @@ include_once "../admin_header.php";
                     $data = mysqli_query($conn ,"select amount,receipt, appointment,date_added, status, (select name from user where user_Id = payments.user) as farmer_name, (select name from user where user_Id = (select doctor from appointment where id = payments.appointment)) as doctor from  payments where 1 order by status asc") or die(mysqli_error($conn));
                     while ($row = mysqli_fetch_array($data)) {
                         ?>
-                        <tr class="<?=($row['status'] == 0 ? '' : ($row['status'] == 1 ? 'bg-success text-white' : 'bg-danger text-white'))?>">
+                        <tr>
                             <td><?=$i++?></td>
                             <td><?=$row['appointment']?></td>
                             <td><?=$row['farmer_name']?></td>
@@ -45,17 +47,17 @@ include_once "../admin_header.php";
                             <td class="text-truncate" style="word-break: break-all"><?=$row['receipt']?></td>
                             <td><?=number_format($row['amount'])?></td>
                             <td><?=$row['date_added']?></td>
-                            <td><?=($row['status'] == 0 ? 'Pending' : ($row['status'] == 1 ? 'Completed' : 'Failed'))?></td>
+                            <td><?=($row['status'] == 0 ? '<span class="badge bg-warning">Pending</span>' : ($row['status'] == 1 ? '<span class="badge bg-success">Completed</span>' : '<span class="badge bg-danger">Failed</span>'))?></td>
                         </tr>
                         <?php
                     }
                     ?>
+
                     </tbody>
                 </table>
             </div>
 
         </div>
-
 
 
 

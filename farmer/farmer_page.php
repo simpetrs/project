@@ -33,7 +33,7 @@ $user = $_SESSION['user_Id'];
 
                                     <div class="d-flex align-items-center">
                                         <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                            <i class="bi bi-people"></i>
+                                           <a href="pages-appointments.php"><i class="bi bi-people"></i></a> 
                                         </div>
                                         <div class="ps-3">
                                             <h6><?=$row['appointments']?></h6>
@@ -53,7 +53,7 @@ $user = $_SESSION['user_Id'];
 
                                     <div class="d-flex align-items-center">
                                         <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                            <i class="bi bi-check-circle"></i>
+                                           <a href=""><i class="bi bi-check-circle"></i></a> 
                                         </div>
                                         <div class="ps-3">
                                             <h6> <?=$row['approved']?></h6>
@@ -71,11 +71,11 @@ $user = $_SESSION['user_Id'];
                             <div class="card info-card report-card">
 
                                 <div class="card-body">
-                                    <h5 class="card-title">Messages / Notes sent</h5>
+                                    <h5 class="card-title">Messages / Notes Received</h5>
 
                                     <div class="d-flex align-items-center">
                                         <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                            <i class="bi bi-envelope-check"></i>
+                                            <a href="pages-messages.php"><i class="bi bi-envelope-check"></i></a>
                                         </div>
                                         <div class="ps-3">
                                             <h6><?=$row['messages']?></h6>
@@ -91,11 +91,11 @@ $user = $_SESSION['user_Id'];
                             <div class="card info-card report-card">
 
                                 <div class="card-body">
-                                    <h5 class="card-title">cases reported</h5>
+                                    <h5 class="card-title">Cases Reported</h5>
 
                                     <div class="d-flex align-items-center">
                                         <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                            <i class="bi bi-exclamation-circle-fill"></i>
+                                           <a href="cases.php"><i class="bi bi-exclamation-circle-fill"></i></a> 
                                         </div>
                                         <div class="ps-3">
                                             <a href="./cases.php">

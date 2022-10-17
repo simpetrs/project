@@ -22,67 +22,40 @@ include_once "../admin_header.php";
 
   <div class="row">
     <div class="col-md-6 col-lg-4 mb-4">
-      <h6 class="mb-3 text-primary"><i class="far fa-paper-plane text-primary pe-2"></i> A simple
-        question?</h6>
+      <h6 class="mb-3 text-primary">What kind of services your System provide?</h6>
       <p>
-        <strong><u>Absolutely!</u></strong> We work with top payment companies which guarantees
-        your
-        safety and
-        security. All billing information is stored on our payment processing partner.
+      This is another big question that people have. While some vet systems provide an array of services for various animal care needs, others may specialize in certain treatments or procedures, or even stages of care. You need to let people know what you can (and can’t) do so that they can make the best decisions about where to take their pets. 
       </p>
     </div>
 
     <div class="col-md-6 col-lg-4 mb-4">
-      <h6 class="mb-3 text-primary"><i class="fas fa-pen-alt text-primary pe-2"></i> A question
-        that
-        is longer then the previous one?</h6>
-      <p>
-        <strong><u>Yes, it is possible!</u></strong> You can cancel your subscription anytime in
-        your
-        account. Once the subscription is
-        cancelled, you will not be charged next month.
-      </p>
+      <h6 class="mb-3 text-primary">How do I schedule an appointment in Verms?</h6>
+      <p>We make scheduling appointments easy. Call any of our locations below or use our Online Scheduling Calendar or Chat Now features to schedule your pet’s appointment.
+
+</p>
     </div>
 
     <div class="col-md-6 col-lg-4 mb-4">
-      <h6 class="mb-3 text-primary"><i class="fas fa-user text-primary pe-2"></i> A simple
-        question?
+      <h6 class="mb-3 text-primary">How do i make payments on Verms?
       </h6>
       <p>
-        Currently, we only offer monthly subscription. You can upgrade or cancel your monthly
-        account at any time with no further obligation.
+      Payments on Verms are made after making an appointment with a particular doctor as a farmer is always requested to pay half of the price of treatment to the doctor by using mobile money 
       </p>
     </div>
 
     <div class="col-md-6 col-lg-4 mb-4">
-      <h6 class="mb-3 text-primary"><i class="fas fa-rocket text-primary pe-2"></i> A simple
-        question?
+      <h6 class="mb-3 text-primary">How often do you suggest check-ups for my animals?
+
       </h6>
       <p>
-        Yes. Go to the billing section of your dashboard and update your payment information.
+        Animal check-ups and treatment are based on the type and seriousity of the sickness such as emergency , not an emergency,etc but you will always be answered to.
       </p>
     </div>
 
-    <div class="col-md-6 col-lg-4 mb-4">
-      <h6 class="mb-3 text-primary"><i class="fas fa-home text-primary pe-2"></i> A simple
-        question?
-      </h6>
-      <p><strong><u>Unfortunately no</u>.</strong> We do not issue full or partial refunds for any
-        reason.</p>
-    </div>
-
-    <div class="col-md-6 col-lg-4 mb-4">
-      <h6 class="mb-3 text-primary"><i class="fas fa-book-open text-primary pe-2"></i> Another
-        question that is longer than usual</h6>
-      <p>
-        Of course! We’re happy to offer a free plan to anyone who wants to try our service.
-      </p>
-    </div>
+    
   </div>
 </section>
 </div>
-
-
 
 
               

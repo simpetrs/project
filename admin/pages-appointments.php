@@ -13,11 +13,11 @@ include_once "../admin_header.php";
         </div><!-- End Page Title -->
 
         <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="data_table">
-                        <table id="datatable" class="table table-striped table-bordered">
-                            <thead class="table-dark">
+        <div class="row">
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table id="datatable" class="table table-striped table-bordered">
+                    <thead class="table-dark">
                             <tr>
                                 <th></th>
                                 <th>Doctor</th>
@@ -25,7 +25,7 @@ include_once "../admin_header.php";
                                 <th>Scheduled Date</th>
                                 <th>Scheduled Time</th>
                                 <th>Urgency</th>
-                                <th>Details</th>
+                                <th>Description</th>
                                 <th>Date created</th>
                                 <th>Payment</th>
                             </tr>
@@ -45,7 +45,7 @@ include_once "../admin_header.php";
                                     <td><?=$row['appointment'] == 1 ? '<b>Critical <i class="fa fa-exclamation-triangle text-danger"></i></b>' : 'Normal'?></td>
                                     <td><?=$row['description']?></td>
                                     <td><?=$row['date_added']?></td>
-                                    <td><?=$row['status'] == 1 ?'Approved' : ($row['status'] == 0 ? 'Pending' : 'Rejected')?></td>
+                                    <td><?=$row['status'] == 1 ?'<span class="badge bg-success">Approved</span>' : ($row['status'] == 0 ? '<span class="badge bg-warning">Pending</span>' : '<span class="badge bg-danger">Rejected</span>')?></td>
                                 </tr>
                                 <?php
                             }
@@ -131,7 +131,7 @@ include_once "../admin_header.php";
 <script type="text/javascript">
     $('#datatable').DataTable({});
     function disableBtn() {
-        $("#btn").hide()
+        // $("#btn").hide()
     }
 </script>
 

@@ -55,7 +55,7 @@ if ($sql_query == true){
 
                 <div class="form-outline mb-4">
                     <h6>Where are you located?</h6>
-                  <input type="text" id="form3Example8" name="your_location" class="form-control form-control-lg" placeholder="Location"/>
+                  <input type="text" id="form3Example8" name="your_location" class="form-control form-control-lg" placeholder="Location" required/>
                 </div>
 
                 <div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
@@ -63,7 +63,7 @@ if ($sql_query == true){
                   <h6 class="mb-0 me-4">Appointment Type: </h6>
 
                   <div class="form-check form-check-inline mb-0 me-4">
-                    <input type="radio" class="form-check-input"  name="appointment_Type" id="app" value="1" />
+                    <input type="radio" class="form-check-input"  name="appointment_Type" id="app" value="1"/>
                     <label class="form-check-label" for="emergency">Emergency</label>
                   </div>
 
@@ -76,20 +76,21 @@ if ($sql_query == true){
                 </div>
 
                 <div class="form-outline mb-4">
-                <textarea class="form-control" placeholder="Disease Description" name="appointment_Description"></textarea>
+                  <h6>Description</h6>
+                <textarea class="form-control" placeholder="Disease Description" name="appointment_Description" required></textarea>
                 </div>
 
                 <div class="row">
                   <div class="col-md-6 mb-4">
                       <h6>Date of appointment</h6>
                     <div class="form-outline">
-                      <input type="date" id="form3Example1m" class="form-control form-control-lg" name="appointment_Date"/>
+                      <input type="date" id="form3Example1m" class="form-control form-control-lg" name="appointment_Date" required/>
                     </div>
                   </div>
                   <div class="col-md-6 mb-4">
                       <h6>Time Of appointment</h6>
                     <div class="form-outline">
-                      <input type="time" id="form3Example1n" class="form-control form-control-lg" name="appointment_Time"/>
+                      <input type="time" id="form3Example1n" class="form-control form-control-lg" name="appointment_Time" required/>
                     </div>
                   </div>
                 </div>

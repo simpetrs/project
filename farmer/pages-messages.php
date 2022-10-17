@@ -13,7 +13,10 @@ include_once  "../header.php";
             </div>
         </div><!-- End Page Title -->
     </div>
-    <div class="col-12">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+    <div class="table-responsive">
         <table class="table shadow table-striped">
             <thead>
             <tr>
@@ -24,7 +27,7 @@ include_once  "../header.php";
                 <th>Date sent</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody id="messages">
             <?php
             $no =1;
             $data = mysqli_query($conn, "select message, name, date_added, (select description from appointment where id = messages.appointment) as appointment from messages left join user on user.user_Id = messages.sender where receiver = '" .$_SESSION['user_Id']. "' order by id desc") or die(mysqli_error($conn));

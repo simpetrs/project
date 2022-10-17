@@ -39,10 +39,16 @@ include_once './config.php';
 
     <link rel="stylesheet" href="assets/vendor/font-awesome/css/font-awesome.min.css">
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="  crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../ajax.js"></script>
     <!-- Template Main CSS File -->
     <link href="assets/css/main.css" rel="stylesheet">
     <link href='../lib/main.css' rel='stylesheet' />
     <script src='../lib/main.js'></script>
+    <script>
+
+    </script>
 </head>
 
 
@@ -61,7 +67,7 @@ include_once './config.php';
 
     <div class="search-bar">
         <form class="search-form d-flex align-items-center" method="get" action="./search.php">
-            <input type="text" name="query" placeholder="Search" title="Enter search keyword" <?=isset($_GET['query']) ? "value='" . $_GET['query'] . "'" : ''?>>
+            <input type="text" name="query" placeholder="Search for Doctor" title="Enter search keyword" <?=isset($_GET['query']) ? "value='" . $_GET['query'] . "'" : ''?>>
             <button type="submit" title="Search"><i class="bi bi-search"></i></button>
         </form>
     </div><!-- End Search Bar -->
@@ -87,7 +93,7 @@ include_once './config.php';
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
                     <li class="dropdown-header">
                         Notifications
-                        <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+                        <a href="./pages-appointments.php"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
                     </li>
                     <li>
                         <hr class="dropdown-divider">
@@ -126,7 +132,7 @@ include_once './config.php';
                             <i class="bi bi-check-circle text-success"></i>
                             <div>
                                 <h4>Note</h4>
-                                <p><a href="./messages.php"><?=$row['name']?> has updated your appointment with a note.</a></p>
+                                <p><a href="./pages-messages.php"><?=$row['name']?> has updated your appointment with a note.</a></p>
                                 <p><?=$row['date_added']?></p>
                             </div>
                         </li>
@@ -233,7 +239,7 @@ include_once './config.php';
 
         <li class="nav-item">
             <a class="nav-link collapsed" href="pages-payment.php">
-                <i class="fa fa-usd" aria-hidden="true"></i>
+            <i class="fa fa-money" aria-hidden="true"></i>
                 <span>Payments</span>
             </a>
         </li><!-- End payments Page Nav -->

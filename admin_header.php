@@ -11,6 +11,15 @@ if ($_SESSION['role'] != 1){
 }
 include_once '../config.php';
 ?>
+
+<?php
+//$conn = $conn;
+$count=0;
+
+$sql2="SELECT * FROM payments WHERE status = 1";
+$result=mysqli_query($conn, $sql2);
+$count=mysqli_num_rows($result);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,6 +48,7 @@ include_once '../config.php';
     <link href='../lib/main.css' rel='stylesheet' />
     <script src='../lib/main.js'></script>
     <link rel="stylesheet" href="assets/vendor/font-awesome/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
     <!-- Template Main CSS File -->
     <link href="assets/css/main.css" rel="stylesheet">
     <script>
@@ -58,7 +68,7 @@ include_once '../config.php';
 <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-        <a href="header_doctor.php" class="logo d-flex align-items-center">
+        <a href="admin_page.php" class="logo d-flex align-items-center">
             <img src="assets/img/logo.png" alt="">
             <span class="d-none d-lg-block">VERMS</span>
         </a>
@@ -80,8 +90,8 @@ include_once '../config.php';
                     <i class="bi bi-search"></i>
                 </a>
             </li><!-- End Search Icon-->
-
-            <li class="nav-item dropdown">
+            
+<li class="nav-item dropdown">
 
                 <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
                     <i class="fa fa-bell" aria-hidden="true"></i>
@@ -137,6 +147,8 @@ include_once '../config.php';
 
                 </ul><!-- End Notification Dropdown Items -->
 
+
+        
             </li><!-- End Notification Nav -->
 
             <li class="nav-item dropdown pe-3">

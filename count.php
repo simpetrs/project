@@ -1,0 +1,11 @@
+$sql = "select name, date_added, amount from payments left join user on user.user_Id = payments.user where status = 1 order by id desc";
+$result = $conn->query($sql);
+$row = $result->fetch_assoc();
+$count = $result->num_rows;
+echo $count;
+$conn->close();$sql = "SELECT * from tbl_name where status = 'unread'";
+$result = $conn->query($sql);
+$row = $result->fetch_assoc();
+$count = $result->num_rows;
+echo $count;
+$conn->close();

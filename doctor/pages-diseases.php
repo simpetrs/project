@@ -12,11 +12,29 @@ include_once "../header_doctor.php";
                 <h1>Reported Diseases</h1>                              
                 </div>
               </div><!-- End Page Title -->
+      
+              <?php
+if(isset($_POST['submit'])){
+  $area = $_POST['area'];
+  $date = date("Y-m-d");
+  $user = $_SESSION['user_Id'];
+  $note = $_POST['note']; 
+  $path = "files/".$note;
+$insert = "INSERT INTO report (report_area, date_time, report_desc, doctor) VALUES ('$area', '". date("Y-m-d") . "', '$note', '$user')" or die(mysqli_error($conn));
+$sql_query = mysqli_query($conn, $insert);
+if ($sql_query == true){
+  echo "<div class='alert alert-info'>Successfully Added a Field Report</div>";
+}else{
+  echo mysqli_error($conn);
+}
+} 
+?>         
+
 
               <div class="container">
         <div class="row">
             <div class="col-12">
-                <div class="data_table">
+                <div class="data_table table-responsive">
                     <table id="example" class="table table-striped table-bordered">
                         <thead class="table-dark">
                         <tr>
@@ -26,6 +44,7 @@ include_once "../header_doctor.php";
                                 <th>Animal Type</th>
                                 <th>Case outbreak</th>
                             <th>Date</th>
+                            <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -41,6 +60,7 @@ include_once "../header_doctor.php";
                                 <td><?=$row['animal']?></td>
                                 <td><?=$row['disease_case']?></td>
                                 <td><?=$row['date_added']?></td>
+                                <td><button class="btn btn-primary float-end " onclick="addreport()">Report</button></td>
                             </tr>
                   <?php
                         }
@@ -56,6 +76,30 @@ include_once "../header_doctor.php";
               
 
   </main><!-- End #main -->
+
+  <div class="modal" id="myModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Attach Field Report</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body p-4" id="modal">
+
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
 
   <!-- ======= Footer ======= -->
   <!-- <footer id="footer" class="footer">
@@ -88,4 +132,28 @@ include_once "../header_doctor.php";
 <script type="text/javascript">
     $('#datatable').DataTable({});
 </script>
+
+<Script>
+    function addreport() {
+        let html = `
+<form action='' method='post'>
+            Hello, you are adding a treatment report from the field!
+<br/>
+<br/>
+<textarea class='form-control' name='not' placeholder="Add Notes"></textarea><br/>
+<div class="form-outline mb-4">
+  <h6>Please fill in the reporting area</h6>
+   <input type="text" id="form3Example8" name="area" class="form-control form-control-lg" placeholder="Reporting Area" required/>
+ </div>
+<div class='alert alert-info'>Upload a field report file. It will be seen by the all doctors</div><br/>
+<input type="file" name="note" id="fileToUpload">
+<input type='submit' name='submit' value='Upload Report' class='form-control btn btn-primary mt-3'>
+</form>
+        `
+        $("#modal").html(html)
+        $("#myModal").modal("toggle")
+        $('.file-upload').file_upload();
+        
+    }
+</Script>
 </html>

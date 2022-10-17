@@ -3,6 +3,7 @@ include_once ("../header_doctor.php");
 ?>
     <main class="main bg-white" id="main">
         <div class="row">
+        <div class="table-responsive">
             <div class="col-md-12">
                 <h4>SEARCH RESULTS</h4>
                 <div class="alert alert-info">Search results for <b><?=$_GET['query']?></b></div>

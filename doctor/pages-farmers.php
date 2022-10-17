@@ -17,7 +17,7 @@ include_once "../header_doctor.php";
               <div class="container">
         <div class="row">
             <div class="col-12">
-                <div class="data_table">
+                <div class="table-responsive">
                     <table id="example" class="table table-striped table-bordered">
                         <thead class="table-dark">
                             <tr>

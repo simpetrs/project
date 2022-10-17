@@ -15,9 +15,9 @@ include_once "../header.php";
                     if (isset($_POST['names'])) {
                         $names = trim($_POST['names']);
                         $description = trim($_POST['about']);
-                        $job = trim($_POST['job']);
+                        // $job = trim($_POST['job']);
                         $country = trim($_POST['country']);
-                        $company  = trim($_POST['company']);
+                        // $company  = trim($_POST['company']);
                         $address = trim($_POST['address']);
                         $phone = trim($_POST['phone']);
                         if (! empty($_FILES['file']['name'])) {
@@ -30,8 +30,7 @@ include_once "../header.php";
                             </div>
                     <?php
                         } else {
-                            mysqli_query($conn, "update user set name = '$names', description = '$description',
-                                              job = '$job', country = '$country', address = '$address', phone = '$phone', company = '$company' where user_Id = '$user' ") or die(mysqli_query($conn));
+                            mysqli_query($conn, "update user set name = '$names', description = '$description', country = '$country', address = '$address', phone = '$phone' where user_Id = '$user' ") or die(mysqli_query($conn));
                             ?>
                             <div class="alert alert-success">
                                 Successfully updated Personal Profile.
@@ -80,7 +79,7 @@ include_once "../header.php";
 
               <img src="assets/img/<?=$rows['photo']?>" alt="<?=$rows['photo']?>" class="rounded-circle">
               <h2><?=$_SESSION['names']?></h2>
-              <h3></h3>
+              <h3>Farmer</h3>
       
             </div>
           </div>
@@ -127,7 +126,7 @@ include_once "../header.php";
                   </div>
 
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Telephone number</div>
+                    <div class="col-lg-3 col-md-4 label">Phone</div>
                     <div class="col-lg-9 col-md-8"><?php echo $rows["phone"]; ?></div>
                   </div>
 
@@ -141,15 +140,6 @@ include_once "../header.php";
                     <div class="col-lg-9 col-md-8"><?php echo $rows["address"]; ?></div>
                   </div>
 
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Phone</div>
-                    <div class="col-lg-9 col-md-8"><?php echo $rows["phone"]; ?></div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Email</div>
-                    <div class="col-lg-9 col-md-8"><?php echo $rows["email"]; ?></div>
-                  </div>
                     <div class="row">
                         <div class="col-lg-3 col-md-4 label">Description</div>
                         <div class="col-lg-9 col-md-8"><?php echo $rows["description"]; ?></div>
@@ -165,9 +155,9 @@ include_once "../header.php";
                       <div class="col-md-8 col-lg-9">
                         <img src="assets/img/<?=$rows['photo']?>" alt="Profile">
                         <div class="pt-2">
-                          <label for="fileUpload" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></label>
+                          <label for="fileUpload" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="fa fa-upload" aria-hidden="true"></i></label>
                             <input type="file" id="fileUpload" name="file" style="display: none" onchange="alert('file has been selected')"/>
-                          <a href="../upload.php?delete_pic=<?=$rows['photo']?>" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
+                          <a href="../upload.php?delete_pic=<?=$rows['photo']?>" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="fa fa-trash" aria-hidden="true"></i></a>
                         </div>
                       </div>
                     </div>
@@ -183,20 +173,6 @@ include_once "../header.php";
                       <label for="about" class="col-md-4 col-lg-3 col-form-label">About</label>
                       <div class="col-md-8 col-lg-9">
                         <textarea name="about" class="form-control" id="about" style="height: 100px" placeholder="Short Biography"><?=$rows['description']?></textarea>
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="company" class="col-md-4 col-lg-3 col-form-label">Company</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="company" type="text" class="form-control" id="company" placeholder="Where do you work from?" value="<?=$rows['company']?>">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="Job" class="col-md-4 col-lg-3 col-form-label">Job</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="job" type="text" class="form-control" id="Job" placeholder="Your Job description" value="<?=$rows['job']?>">
                       </div>
                     </div>
 

@@ -3,6 +3,7 @@ include_once ("../header.php");
 ?>
 <main class="main bg-white" id="main">
     <div class="row">
+    <div class="table-responsive">
         <div class="col-md-12">
             <h4>SEARCH RESULTS</h4>
             <div class="alert alert-info">Search results for <b><?=$_GET['query']?></b></div>
@@ -11,13 +12,13 @@ include_once ("../header.php");
             $query = $_GET['query'];
             $user = $_SESSION['user_Id'];
             $role = $_SESSION['role'];
-            $users = mysqli_query($conn, "select * from user where name like '%$query%' order by name asc") or die(mysqli_error($conn));
+            $users = mysqli_query($conn, "select * from user where user_type like '%$query%' order by name asc") or die(mysqli_error($conn));
             $cases = mysqli_query($conn, "select disease_case, animal_disease_cases.date_added, animal_disease_cases.location,animal_disease_cases.date_added, (select animal from animals where id = animal_disease_cases.animal) as animal, (select name from user where user_Id = animal_disease_cases.user) as farmer from animal_disease_cases where disease_case like '%$query%' order by date_added") or die(mysqli_error($conn));
             if ($_SESSION['role'] != 1)
                 if ($_SESSION['role'] == 2)
-                    $messages = mysqli_query($conn, "select message, name, date_added from messages left join user on user.user_Id = messages.receiver from messages where message like '%$query%' and (receiver = '$user' or sender = '$user') order by date_added") or die(mysqli_error($conn));
+                $messages = mysqli_query($conn, "select message, name, date_added from messages left join user on user.user_Id = messages.receiver where message like '%$query%' and (receiver = '$user' or sender = '$user') order by date_added") or die(mysqli_error($conn));
                 else
-                    $messages = mysqli_query($conn, "select message, name, date_added from messages left join user on user.user_Id = messages.sender from messages where message like '%$query%' and (receiver = '$user' or sender = '$user') order by date_added") or die(mysqli_error($conn));
+                    $messages = mysqli_query($conn, "select message, name, date_added from messages left join user on user.user_Id = messages.sender  where message like '%$query%' and (receiver = '$user' or sender = '$user') order by date_added") or die(mysqli_error($conn));
 
             ?>
             <table class="table table-striped">

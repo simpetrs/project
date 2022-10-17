@@ -4,12 +4,12 @@ include_once "../admin_header.php";
 ?>
 
 <?php
-//count property
+//count doctors
 $select = "SELECT * FROM user WHERE user_Type='doctor'";
 $sql_query = mysqli_query($conn, $select);
 $countdoc = mysqli_num_rows($sql_query);
 
-//count managers
+//count farmers
 $select1 = "SELECT * FROM user WHERE user_Type='farmer'";
 $sql_query1 = mysqli_query($conn, $select1);
 $countfar = mysqli_num_rows($sql_query1);
@@ -21,12 +21,9 @@ $sql_query4 = mysqli_query($conn, $select4);
 $countapp = mysqli_num_rows($sql_query4);
 
 $report = mysqli_query($conn, "select user_Id, (select count(id) from payments  where status = 1 limit 1) as payments, (select count(id) from animal_disease_cases where 1 limit 1) as cases, (select count(id) from appointment where 1 limit 1) as appointments from user where 1 limit 1") or die(mysqli_error($conn));
-$r = mysqli_fetch_array($report);
+$row = mysqli_fetch_array($report);
 
-//count diseases
-// $select5 = "SELECT * FROM diseases";
-// $sql_query5 = mysqli_query($conn, $select5);
-// $countdis = mysqli_num_rows($sql_query5);
+
  ?>
 
 
@@ -48,8 +45,8 @@ $r = mysqli_fetch_array($report);
         <div class="col-lg-8">
           <div class="row">
 
-            <!-- Doctors Card -->
-            <div class="col-xxl-4 col-md-6">
+         <!-- Doctors Card -->
+         <div class="col-xxl-4 col-md-6">
               <div class="card info-card doctor-card">
 
                 <div class="card-body">
@@ -57,7 +54,7 @@ $r = mysqli_fetch_array($report);
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="fa fa-users" aria-hidden="true"></i>
+                    <a href="pages-doctors.php"><i class="fa fa-briefcase" aria-hidden="true"></i></a>
                     </div>
                     <div class="ps-3">
                       <h6><?php echo $countdoc; ?></h6>
@@ -77,7 +74,7 @@ $r = mysqli_fetch_array($report);
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="fa fa-users" aria-hidden="true"></i>
+                    <a href="pages-farmers.php"><i class="fa fa-users" aria-hidden="true"></i></a>
                     </div>
                     <div class="ps-3">
                       <h6><?php echo $countfar; ?></h6>
@@ -99,10 +96,10 @@ $r = mysqli_fetch_array($report);
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="fa fa-flag" aria-hidden="true"></i>
+                    <a href="pages-diseases.php"><i class="fa fa-bug" aria-hidden="true"></i></a>
                     </div>
                     <div class="ps-3">
-                      <h6><?=$r['cases']?></h6>
+                      <h6><?=$row['cases']?></h6>
 
                     </div>
                   </div>
@@ -121,10 +118,10 @@ $r = mysqli_fetch_array($report);
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="fa fa-usd" aria-hidden="true"></i>
+                    <a href="payments.php"><i class="fa fa-money" aria-hidden="true"></i></a>
                     </div>
                     <div class="ps-3">
-                      <h6><?php echo $r['payments']; ?></h6>
+                      <h6><?php echo $row['payments']; ?></h6>
                     </div>
                   </div>
                 </div>
@@ -141,10 +138,10 @@ $r = mysqli_fetch_array($report);
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="fa fa-plus-square" aria-hidden="true"></i>
+                    <a href="pages-appointments.php"><i class="fa fa-plus-square" aria-hidden="true"></i></a>
                     </div>
                     <div class="ps-3">
-                      <h6><?php echo $r['appointments']; ?></h6>
+                      <h6><?php echo $row['appointments']; ?></h6>
                     </div>
                   </div>
                 </div>
@@ -152,8 +149,8 @@ $r = mysqli_fetch_array($report);
               </div>
             </div><!-- End Appointments Card -->
 
-             <!-- Reported diseases Card -->
-             <!-- <div class="col-xxl-4 col-md-6">
+             <!-- Reported diseases Card
+             <div class="col-xxl-4 col-md-6">
               <div class="card info-card doctor-card">
 
                 <div class="card-body">
@@ -171,6 +168,56 @@ $r = mysqli_fetch_array($report);
 
               </div>
             </div>End Appointments Card -->
+
+            <div class="container">
+    <div class="row">        
+            <div class="col-12">            
+                    <div class="pagetitle"> 
+                        <h1> Field Reports
+                           
+                        </h1>
+                    </div>
+                <div class="table-responsive">
+                    <table id="datatable" class="table table-striped table-bordered">
+                    <thead class="table-dark">
+                                <tr>
+                                    <th></th>
+                                    <th>Doctor</th>
+                                    <th>Report Area</th>
+                                    <th>Report Details</th>
+                                    <th>Date Added</th>
+                                    <th>Download</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php 
+                                    $query = mysqli_query($conn, "select report_desc, report.date_time, report.report_area, (select name from user where user_Id = report.doctor) as doctor from report")or die(mysqli_error($conn));
+                                    $no = 1;
+                              
+                  while ($rows = mysqli_fetch_array($query)) {
+                  ?>
+                                            <tr>
+                                                <td><?=$no++?></td>
+                                                <td><?= $rows['doctor']; ?></td>
+                                                <td><?= $rows['report_area']; ?></td>
+                                                <td><?= $rows['report_desc']; ?></td>
+                                                <td><?= $rows['date_time']; ?></td>
+                                                <td>
+                                                  <button class="btn btn-success"><a href="download.php">Download</a></button>
+                                                </td>
+                                            </tr>
+                                            <?php
+                                        }
+                                   
+                                ?>
+                                
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
             
 
 
@@ -236,7 +283,7 @@ $r = mysqli_fetch_array($report);
                         },
                         {
                           value: 300,
-                          name: 'Appoitments'
+                          name: 'Appointments'
                         }
                       ]
                     }]
@@ -248,7 +295,7 @@ $r = mysqli_fetch_array($report);
           </div><!-- End Daily system usage -->
 
 
-          <!-- News & Updates Traffic -->
+          <!-- News & Updates outbreaks -->
           <div class="card">
           
             <div class="card-body pb-0">
@@ -285,8 +332,6 @@ $r = mysqli_fetch_array($report);
     <div class="copyright">&copy; Copyright <strong><span>Group-IST 6</span></strong>. All Rights Reserved
     </div>
   </footer>End Footer -->
-
-  <!-- <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a> -->
 
   <!-- Vendor JS Files -->
   <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>

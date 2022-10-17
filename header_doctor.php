@@ -37,6 +37,9 @@ include_once '../config.php';
     <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
     <link href='../lib/main.css' rel='stylesheet' />
     <script src='../lib/main.js'></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="  crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../ajax.js"></script>
 
     <link rel="stylesheet" href="assets/vendor/font-awesome/css/font-awesome.min.css">
 
@@ -50,7 +53,7 @@ include_once '../config.php';
 <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-        <a href="admin_page.php" class="logo d-flex align-items-center">
+        <a href="doctor_page.php" class="logo d-flex align-items-center">
             <img src="assets/img/logo.png" alt="">
             <span class="d-none d-lg-block">VERMS</span>
         </a>
@@ -83,7 +86,7 @@ include_once '../config.php';
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
                     <li class="dropdown-header">
                         Notifications
-                        <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+                        <a href="./pages-appointments.php"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
                     </li>
                     <li>
                         <hr class="dropdown-divider">

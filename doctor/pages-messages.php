@@ -13,7 +13,10 @@ include_once  "../header_doctor.php";
                 </div>
               </div><!-- End Page Title -->
 </div>
-      <div class="col-12">
+<div class="container">
+        <div class="row">
+            <div class="col-12">
+      <div class="table-responsive">
           <table class="table shadow table-striped">
               <thead>
               <tr>

@@ -30,37 +30,38 @@ include_once "../header_doctor.php";
                     ?>
                 </div>
               </div><!-- End Page Title -->
-
               <div class="container">
         <div class="row">
             <div class="col-12">
-                <div class="data_table">
+                <div class="table-responsive">
                     <table id="datatable" class="table table-striped table-bordered">
                     <thead class="table-dark">
                         <tr>
                             <th></th>
                                 <th>Farmer</th>
-                                <th>Date</th>
-                                <th>Time</th>
-                                <th>Status</th>
+                                <th>Scheduled Date</th>
+                                <th>Scheduled Time</th>
+                                <th>Urgency</th>
                                 <th>Description</th>
                             <th>Location</th>
+                            <th>Status</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody is="appointments">
                   <?php
-                  $data = mysqli_query($conn, "select name, appointment.status, appointment.id, _time, _date, appointment.date_added, appointment.description, location from appointment left join payments on payments.appointment = appointment.id left join user on user.user_Id = appointment.user where appointment.doctor = '" . $_SESSION['user_Id'] . "' and payments.status = 1") or die(mysqli_error($conn));
+                  $data = mysqli_query($conn, "select name, appointment.status, appointment.appointment, appointment.id, _time, _date, appointment.date_added, appointment.description, location from appointment left join payments on payments.appointment = appointment.id left join user on user.user_Id = appointment.user where appointment.doctor = '" . $_SESSION['user_Id'] . "' and payments.status = 1") or die(mysqli_error($conn));
                   $no = 1;
                   while ($rows = mysqli_fetch_array($data)) {
                   ?>
-                                <?php
-
-                    ?>
-                      <tr class="<?=$rows['status'] == 1 ? 'bg-success text-white' : 'bg-danger text-white'?>">
+             
+                      <tr>
                           <td><?=$no++?></td>
                           <td><?=$rows['name']?></td>
                           <Td><?=$rows['_date']?></Td>
                           <Td><?=$rows['_time']?></Td>
+                          <td><?=$rows['appointment'] == 1 ? '<b>Critical <i class="fa fa-exclamation-triangle text-danger"></i></b>' : 'Normal'?></td>
+                          <td><?=$rows['description']?></td>
+                          <td><?=$rows['location']?></td>
                           <td ><?php
                               if ($rows['status'] == 0) {
                                   ?>
@@ -69,14 +70,12 @@ include_once "../header_doctor.php";
                               }else
                               {
                                   ?>
-                                  <?=$rows['status'] == 1 ? 'Approved' : 'Rejected'?>
+                                  <?=$rows['status'] == 1 ? '<span class="badge bg-success">Approved</span>': '<span class="badge bg-danger">Rejected</span>'?>
                                   <button class="btn btn-primary" onclick="approveAppoinment('<?=$rows['id']?>', '<?=$rows['name']?>')">Update status</button>
                               <?php
                               }
                               ?>
                           </td>
-                          <td><?=$rows['description']?></td>
-                          <td><?=$rows['location']?></td>
                       </tr>
 
                             <?php   
@@ -149,9 +148,9 @@ include_once "../header_doctor.php";
 <input type='hidden' name='id' value='` + id +`'/>
 Mark Appointment <select class='form-control' name='status'><option value='0'>Pending</option><option value='1'>Approved</option><option value='2'>Rejected</option></select>
 <b>Message</b>
-<div class='alert alert-info'>Add a note to for your status update. It will be seen by the Farmer</div>
+<div class='alert alert-info'>Add a note for your status update. It will be seen by the Farmer</div>
 <textarea class='form-control' required name='note' placeholder="Notes"></textarea>
-<input type='submit' name='submit' value='update Status' class='form-control btn btn-primary mt-3'>
+<input type='submit' name='submit' value='Update Status' class='form-control btn btn-primary mt-3'>
 </form>
         `
         $("#modal").html(html)

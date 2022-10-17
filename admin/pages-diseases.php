@@ -14,11 +14,11 @@ include_once "../admin_header.php";
         </div><!-- End Page Title -->
 
         <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="data_table">
-                        <table id="example" class="table table-striped table-bordered">
-                            <thead class="table-dark">
+        <div class="row">
+            <div class="col-12">
+                <div class="data_table table-responsive">
+                    <table id="example" class="table table-striped table-bordered">
+                        <thead class="table-dark">
                             <tr>
                                 <th></th>
                                 <th>From Farmer</th>

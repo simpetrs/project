@@ -2,7 +2,7 @@
 include "config.php";
 
 function get_pending_txs($con) {
-    $query = mysqli_query($con, "select id, receipt from payments where status = 0") or die(mysqli_error($con));
+    $query = mysqli_query($con, "select id, receipt from payments where status = 0 order by id desc limit 2") or die(mysqli_error($con));
     while($row = mysqli_fetch_array($query)) {
         $data = send_payload($row['receipt']);
         if (! $data->message->code)

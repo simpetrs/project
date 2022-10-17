@@ -13,7 +13,9 @@ include_once  "../header_doctor.php";
         </div><!-- End Page Title -->
 
     </div>
-    <div class="col-12">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
         <div id='calendar'></div>
     </div>
 

@@ -71,11 +71,11 @@ if(isset($_POST['submit'])){
                     <div class="alert alert-info">
                         The description should include symptoms, duration it has taken and possible first aid rendered with results to such aid on the specific animals reported.
                     </div>
-                <textarea name="description" class="form-control" placeholder="Disease Description"></textarea>
+                <textarea name="description" class="form-control" placeholder="Disease Description" required></textarea>
                 </div>
                     <div class="form-outline mb-4 mt-4">
                         <h6>Where are you reporting from?</h6>
-                        <input type="text" id="form3Example8" name="location" class="form-control form-control-lg" placeholder="Location"/>
+                        <input type="text" id="form3Example8" name="location" class="form-control form-control-lg" placeholder="Location" required/>
                     </div>
 
                     <div class="d-flex justify-content-end pt-3">

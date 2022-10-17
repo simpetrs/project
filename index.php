@@ -47,24 +47,35 @@ if(isset($_POST['submit'])){
 
 ?>
 
-<!DOCTYPE html>  
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>VERMS</title>
+     <!-- Favicons -->
+     <link href="../logo.png" rel="icon">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
+    <!-- Google Fonts Roboto -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" />
+    <!-- MDB -->
+    <!-- <link rel="stylesheet" href="css/mdb.min.css" /> -->
+    <!-- Custom styles -->
+    <!-- <link rel="stylesheet" href="css/style.css" /> -->
+    <link rel="stylesheet" href="style.css" />
+    <!-- <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css"> -->
 </head>
 <body>
-    
-    <div class="form-container">
-
-        <form action="" method="POST">
-            <h3>LOGIN TO YOUR ACCOUNT</h3>
-            <hr>
-
-            <?php
+ <div class="container">
+       <div class="header">
+         <h3 >Login </h3>
+       </div>
+                
+  <form id="form" class="form" method="POST" onsubmit="return passwordValidation()">
+               
+  <?php
             if (isset($_GET['s'])) {
                 ?>
                 <div class="alert alert-success text-success">
@@ -80,12 +91,32 @@ if(isset($_POST['submit'])){
            
            ?>
 
-            <input type="email" name="email" placeholder="Enter your email" required>
-            <input type="password" name="password" placeholder="Enter your password" required>
-            <input type="submit" name="submit" value="login" class="form-btn">
-            <p>Don't have an Account? <a href="register.php">Register Now</a></p>
-        </form>
-
-    </div>
+                  <!-- Email input -->
+                <div class="form-control">
+                    <input type="email" name="email" id="contact-email" placeholder="Email" onkeyup="validateEmail()" />
+                    <span id="email-error"></span>
+                  </div>
+  
+                 <!-- Password input -->
+                 <div class="form-control">
+                    <input type="password" name="password" id="contact-password" placeholder="Password" onkeyup="validatePassword()"/>
+                    <span id="password-error"></span>
+                  </div>
+  
+                <!-- Submit button -->
+                <button type="submit" name="submit" onclick="return validateForm()">Login</button>
+                <span id="submit-error"></span>
+<br>
+<div class="row mb-4">
+                  <p>Don't have an Account? <a href="register.php">Register Now</a></p>
+                </div>
+                
+              
+  </form>
+ </div>
+    <!-- <script type="text/javascript" src="js/mdb.min.js"></script> -->
+    <!-- Custom scripts -->
+    <!-- <script type="text/javascript" src="js/script.js"></script> -->
+    <script src="script.js"></script>
 </body>
-</html> 
+</html>
