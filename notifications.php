@@ -10,6 +10,7 @@ function getPaymentNotification($conn) {
     $i = 1;
     $m = "";
 
+    $user = $_SESSION['user_Id'];
     if ($_SESSION['role'] == 3)
         $data = mysqli_query($conn ,"select amount,receipt, appointment,date_added, status, (select name from user where user_Id = (select doctor from appointment where id = payments.appointment)) as doctor from  payments where user = '" . $_SESSION['user_Id'] ."' and status = 1") or die(mysqli_error($conn));
     elseif ($_SESSION['role'] == 1)
@@ -17,9 +18,9 @@ function getPaymentNotification($conn) {
 
     if (! isset($data))
         return 1;
-    $session = isset($_COOKIE['payments']) ? $_COOKIE['payments'] : 0;
+    $session = isset($_COOKIE['payments' . $user]) ? $_COOKIE['payments' . $user] : 0;
     if ($session < mysqli_num_rows($data))
-        setcookie("payments", mysqli_num_rows($data), time() + (86400 * 30));
+        setcookie("payments" . $user, mysqli_num_rows($data), time() + (86400 * 30));
     else return 1;
     while ($row = mysqli_fetch_array($data)) {
         $m .= "<tr>
@@ -37,11 +38,12 @@ function getPaymentNotification($conn) {
 
 function getMessages($conn) {
     $no =1;
-    $session = isset($_COOKIE['messages']) ? $_COOKIE['messages'] : 0;
+    $user = $_SESSION['user_Id'];
+    $session = isset($_COOKIE['messages' . $user]) ? $_COOKIE['messages' . $user] : 0;
     $data = mysqli_query($conn, "select message, name, date_added, (select description from appointment where id = messages.appointment) as appointment from messages left join user on user.user_Id = messages.sender where receiver = '" .$_SESSION['user_Id']. "' order by id desc") or die(mysqli_error($conn));
     $message = "";
     if ($session < mysqli_num_rows($data))
-        setcookie("messages", mysqli_num_rows($data), time() + (86400 * 30));
+        setcookie("messages" . $user, mysqli_num_rows($data), time() + (86400 * 30));
     else return 1;
 
     while ($rows = mysqli_fetch_array($data)) {
@@ -76,7 +78,8 @@ if (isset($_GET['cases']))
 function appointment($conn) {
     $i = 1;
     $data = "";
-    $session = isset($_COOKIE['appointment']) ? $_COOKIE['appointment'] : 0;
+    $user = $_SESSION['user_Id'];
+    $session = isset($_COOKIE['appointment' . $user]) ? $_COOKIE['appointment' . $user] : 0;
     if ($_SESSION['role'] == 2)
         $query = mysqli_query($conn, "select id, doctor, _date, _time,(select status from payments where payments.appointment = appointment.id order by status desc limit 1) as payment, appointment, description, date_added, (select name from user where user_Id = user) as doctor_names from appointment where doctor = '" . $_SESSION['user_Id'] ."' order by id desc") or die(mysqli_error($conn));
     elseif ($_SESSION['role'] == 1)
@@ -84,7 +87,7 @@ function appointment($conn) {
 
     //return mysqli_num_rows($query);
     if ($session < mysqli_num_rows($query))
-        setcookie("appointment", mysqli_num_rows($query), time() + (86400 * 30));
+        setcookie("appointment" . $user, mysqli_num_rows($query), time() + (86400 * 30));
     else return 1;
     while ($row = mysqli_fetch_array($query)) {
         $data .= "
@@ -107,11 +110,11 @@ function diseases($conn) {
     $no = 1;
     $m = "";
     $user = $_SESSION['user_Id'];
-    $session = isset($_COOKIE['diseases']) ? $_COOKIE['diseases'] : 0;
+    $session = isset($_COOKIE['diseases' . $user]) ? $_COOKIE['diseases' . $user] : 0;
     $data = mysqli_query($conn, "select user, disease_case, animal_disease_cases.date_added, animal_disease_cases.location,animal_disease_cases.date_added, (select animal from animals where id = animal_disease_cases.animal) as animal, (select name from user where user_Id = animal_disease_cases.user) as farmer from animal_disease_cases order by id desc") or die(mysqli_error($conn));
     if ($session < mysqli_num_rows($data))
         //$_SESSION['diseases'] = mysqli_num_rows($data);
-    setcookie("diseases", mysqli_num_rows($data), time() + (86400 * 30));
+    setcookie("diseases" . $user, mysqli_num_rows($data), time() + (86400 * 30));
     else return 1;
     while ($row = mysqli_fetch_array($data)) {
         $m .= "
