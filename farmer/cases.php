@@ -28,7 +28,7 @@ include_once "../header.php";
                                 <th>Date</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="cases">
                             <?php
                             $no = 1;
                             $user = $_SESSION['user_Id'];

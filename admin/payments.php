@@ -33,7 +33,7 @@ include_once "../admin_header.php";
                         <th>Status</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="payments">
                     <?php
                     $i = 1;
                     $data = mysqli_query($conn ,"select amount,receipt, appointment,date_added, status, (select name from user where user_Id = payments.user) as farmer_name, (select name from user where user_Id = (select doctor from appointment where id = payments.appointment)) as doctor from  payments where 1 order by status asc") or die(mysqli_error($conn));

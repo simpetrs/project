@@ -49,6 +49,8 @@ $count=mysqli_num_rows($result);
     <script src='../lib/main.js'></script>
     <link rel="stylesheet" href="assets/vendor/font-awesome/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../ajax.js"></script>
     <!-- Template Main CSS File -->
     <link href="assets/css/main.css" rel="stylesheet">
     <script>
@@ -59,6 +61,7 @@ $count=mysqli_num_rows($result);
             }
             return true
         }
+
     </script>
 
 </head>

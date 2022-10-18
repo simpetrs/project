@@ -28,7 +28,7 @@ include_once "../admin_header.php";
                                 <th>Date</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="cases">
                             <?php
                             $no = 1;
                             $data = mysqli_query($conn, "select disease_case, animal_disease_cases.date_added, animal_disease_cases.location,animal_disease_cases.date_added, (select animal from animals where id = animal_disease_cases.animal) as animal, (select name from user where user_Id = animal_disease_cases.user) as farmer from animal_disease_cases order by id desc") or die(mysqli_error($conn));
